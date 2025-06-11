@@ -1,0 +1,6 @@
+jupyterlite-core
+jupyterlab>=4.0.0
+jupyterlite-pyodide-kernel
+notebook>=7 
+jinja2-time
+mini-auspex

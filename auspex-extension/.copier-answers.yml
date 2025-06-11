@@ -1,0 +1,14 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: v4.3.8
+_src_path: https://github.com/jupyterlab/extension-template
+author_email: vinicius@utfpr.edu.br
+author_name: Vinicius Pegorini
+has_binder: true
+has_settings: false
+kind: frontend
+labextension_name: auspex-extension
+project_short_description: A JupyterLab extension for AUSPEX framework.
+python_name: auspex_extension
+repository: https://github.com/lassip-utfpr/auspex-extension
+test: true
+

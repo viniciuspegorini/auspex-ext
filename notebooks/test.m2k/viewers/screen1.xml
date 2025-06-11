@@ -1,0 +1,963 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_202" class="java.beans.XMLDecoder">
+ <object class="fr.m2m.panels.DndDivisiblePanel">
+  <int>0</int>
+  <object class="fr.m2m.panels.DndDivisiblePanel">
+   <int>1</int>
+   <object class="fr.m2m.panels.DndDivisiblePanel">
+    <object class="fr.multi2000.acquisitionviewer.DPanelView2D_M2K" id="DPanelView2D_M2K0">
+     <void method="add">
+      <object class="fr.deli.graphic.awt2d.implextend.DPanelView2D" id="DPanelView2D0">
+       <void property="background">
+        <object class="java.awt.Color">
+         <int>154</int>
+         <int>156</int>
+         <int>173</int>
+         <int>255</int>
+        </object>
+       </void>
+       <void property="autoSizeMarges">
+        <boolean>false</boolean>
+       </void>
+       <void property="selectedIndex">
+        <array class="int" length="3">
+         <void index="0">
+          <int>-1</int>
+         </void>
+         <void index="1">
+          <int>-1</int>
+         </void>
+         <void index="2">
+          <int>-1</int>
+         </void>
+        </array>
+       </void>
+       <void property="unitGroups">
+        <array class="java.lang.String" length="3">
+         <void index="0">
+          <string>G_sequence</string>
+         </void>
+         <void index="1">
+          <string>G_parcoursSonore</string>
+         </void>
+         <void index="2">
+          <string>G_amplitude</string>
+         </void>
+        </array>
+       </void>
+       <void id="PanelViewImpl2DEx0" property="vue">
+        <void id="InteractorArray0" property="currentInteractors">
+         <void index="1">
+          <void property="layersChangeable">
+           <object class="java.util.Vector">
+            <void method="add">
+             <string>Source_0Curseur</string>
+            </void>
+            <void method="add">
+             <string>Curseurs palette Source_0_A_D</string>
+            </void>
+           </object>
+          </void>
+         </void>
+        </void>
+        <void property="currentInteractors">
+         <object idref="InteractorArray0"/>
+        </void>
+        <void property="dataItemName">
+         <string>/graphicBag</string>
+        </void>
+        <void property="selectedLayers">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <string>Source_0Bscan (Sequences)</string>
+          </void>
+          <void method="add">
+           <string>Source_0Curseur</string>
+          </void>
+          <void method="add">
+           <string>Source_0_MeasureAreaAcqui</string>
+          </void>
+          <void method="add">
+           <string>Source_0Curseur_SCROLLING</string>
+          </void>
+         </object>
+        </void>
+        <void property="dimensionsId">
+         <array class="java.lang.String" length="3">
+          <void index="0">
+           <string>D_numSequence</string>
+          </void>
+          <void index="1">
+           <string>D_profondeurNum</string>
+          </void>
+          <void index="2">
+           <string>D_amplitude</string>
+          </void>
+         </array>
+        </void>
+        <void property="layersUsedForInterval">
+         <array class="java.lang.String" length="1">
+          <void index="0">
+           <string>Source_0Bscan (Sequences)</string>
+          </void>
+         </array>
+        </void>
+        <void property="positionOrigine">
+         <int>2</int>
+        </void>
+       </void>
+       <void method="addPropertyChangeListener">
+        <object idref="DPanelView2D_M2K0"/>
+       </void>
+       <void method="addPropertyChangeListener">
+        <object idref="DPanelView2D_M2K0"/>
+       </void>
+       <void method="addPropertyChangeListener">
+        <object idref="DPanelView2D_M2K0"/>
+       </void>
+       <void method="addPropertyChangeListener">
+        <object idref="DPanelView2D_M2K0"/>
+       </void>
+       <void method="addPropertyChangeListener">
+        <object idref="DPanelView2D_M2K0"/>
+       </void>
+       <void method="addPropertyChangeListener">
+        <object idref="DPanelView2D_M2K0"/>
+       </void>
+       <void method="addPropertyChangeListener">
+        <object idref="DPanelView2D_M2K0"/>
+       </void>
+       <void method="addPropertyChangeListener">
+        <object idref="DPanelView2D_M2K0"/>
+       </void>
+      </object>
+      <string>Center</string>
+     </void>
+     <void method="add">
+      <object class="fr.m2m.javax.swing.M2mJPanel" id="M2mJPanel0">
+       <void property="layout">
+        <object class="javax.swing.BoxLayout">
+         <object idref="M2mJPanel0"/>
+         <int>1</int>
+        </object>
+       </void>
+      </object>
+      <string>South</string>
+     </void>
+     <void property="iconVisible">
+      <boolean>true</boolean>
+     </void>
+     <void property="labelDataItemName">
+      <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_12/labelPositionValeur0</string>
+     </void>
+     <void property="panelView2D">
+      <object idref="DPanelView2D0"/>
+     </void>
+     <void property="progressDataItemName">
+      <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_12/progressBar</string>
+     </void>
+     <void property="titleDataItemName">
+      <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_12/titleMaskNone</string>
+     </void>
+     <void property="visitable">
+      <array class="java.lang.Object" length="17">
+       <void index="0">
+        <object class="fr.deli.ibviewer.IbImmConsumerAdapter">
+         <void property="dataItemName">
+          <string>/fr.multi2000.sourcemanager.TableModelSource/Source_0_12/nbConsumers</string>
+         </void>
+        </object>
+       </void>
+       <void index="1">
+        <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+         <void property="dataItemName">
+          <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_12/progressBar</string>
+         </void>
+        </object>
+       </void>
+       <void index="2">
+        <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+         <void property="dataItemName">
+          <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+         </void>
+         <void property="panelView">
+          <object idref="DPanelView2D_M2K0"/>
+         </void>
+        </object>
+       </void>
+       <void index="3">
+        <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+         <void property="dataItemName">
+          <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_12/progressBar</string>
+         </void>
+        </object>
+       </void>
+       <void index="4">
+        <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+         <void property="dataItemName">
+          <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+         </void>
+         <void property="panelView">
+          <object idref="DPanelView2D_M2K0"/>
+         </void>
+        </object>
+       </void>
+       <void index="5">
+        <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+         <void property="dataItemName">
+          <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_12/progressBar</string>
+         </void>
+        </object>
+       </void>
+       <void index="6">
+        <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+         <void property="dataItemName">
+          <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+         </void>
+         <void property="panelView">
+          <object idref="DPanelView2D_M2K0"/>
+         </void>
+        </object>
+       </void>
+       <void index="7">
+        <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+         <void property="dataItemName">
+          <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_12/progressBar</string>
+         </void>
+        </object>
+       </void>
+       <void index="8">
+        <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+         <void property="dataItemName">
+          <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+         </void>
+         <void property="panelView">
+          <object idref="DPanelView2D_M2K0"/>
+         </void>
+        </object>
+       </void>
+       <void index="9">
+        <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+         <void property="dataItemName">
+          <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_12/progressBar</string>
+         </void>
+        </object>
+       </void>
+       <void index="10">
+        <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+         <void property="dataItemName">
+          <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+         </void>
+         <void property="panelView">
+          <object idref="DPanelView2D_M2K0"/>
+         </void>
+        </object>
+       </void>
+       <void index="11">
+        <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+         <void property="dataItemName">
+          <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_12/progressBar</string>
+         </void>
+        </object>
+       </void>
+       <void index="12">
+        <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+         <void property="dataItemName">
+          <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+         </void>
+         <void property="panelView">
+          <object idref="DPanelView2D_M2K0"/>
+         </void>
+        </object>
+       </void>
+       <void index="13">
+        <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+         <void property="dataItemName">
+          <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_12/progressBar</string>
+         </void>
+        </object>
+       </void>
+       <void index="14">
+        <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+         <void property="dataItemName">
+          <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+         </void>
+         <void property="panelView">
+          <object idref="DPanelView2D_M2K0"/>
+         </void>
+        </object>
+       </void>
+       <void index="15">
+        <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+         <void property="dataItemName">
+          <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_12/progressBar</string>
+         </void>
+        </object>
+       </void>
+       <void index="16">
+        <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+         <void property="dataItemName">
+          <string>fr.multi2000.acquisitionextend.ScenarioEx@4/enAcquisition</string>
+         </void>
+         <void property="panelView">
+          <object idref="DPanelView2D_M2K0"/>
+         </void>
+        </object>
+       </void>
+      </array>
+     </void>
+    </object>
+   </object>
+   <object class="fr.m2m.panels.DndDivisiblePanel">
+    <object class="fr.multi2000.acquisitionviewer.DPanelView2D_M2K" id="DPanelView2D_M2K1">
+     <void method="add">
+      <object class="fr.deli.graphic.awt2d.implextend.DPanelView2D" id="DPanelView2D1">
+       <void property="background">
+        <object class="java.awt.Color">
+         <int>154</int>
+         <int>156</int>
+         <int>173</int>
+         <int>255</int>
+        </object>
+       </void>
+       <void property="autoSizeMarges">
+        <boolean>false</boolean>
+       </void>
+       <void property="nbDigitAxeX">
+        <int>0</int>
+       </void>
+       <void property="nbDigitAxeY">
+        <int>0</int>
+       </void>
+       <void property="selectedIndex">
+        <array class="int" length="2">
+         <void index="0">
+          <int>-1</int>
+         </void>
+         <void index="1">
+          <int>-1</int>
+         </void>
+        </array>
+       </void>
+       <void property="unitGroups">
+        <array class="java.lang.String" length="2">
+         <void index="0">
+          <string>G_parcoursSonore</string>
+         </void>
+         <void index="1">
+          <string>G_amplitude</string>
+         </void>
+        </array>
+       </void>
+       <void id="PanelViewImpl2DEx1" property="vue">
+        <void id="InteractorArray1" property="currentInteractors">
+         <void index="1">
+          <void property="layersChangeable">
+           <object class="java.util.Vector">
+            <void method="add">
+             <string>Source_0Curseur</string>
+            </void>
+            <void method="add">
+             <string>Curseurs palette Source_0_A_A</string>
+            </void>
+            <void method="add">
+             <string>Curseurs palette Source_0_A_D</string>
+            </void>
+            <void method="add">
+             <string>Source_0_A_FftCursors</string>
+            </void>
+           </object>
+          </void>
+         </void>
+        </void>
+        <void property="currentInteractors">
+         <object idref="InteractorArray1"/>
+        </void>
+        <void property="dataItemName">
+         <string>/graphicBag</string>
+        </void>
+        <void property="selectedLayers">
+         <object class="java.util.ArrayList">
+          <void method="add">
+           <string>Source_0Ascan</string>
+          </void>
+          <void method="add">
+           <string>Source_0Curseur</string>
+          </void>
+          <void method="add">
+           <string>Quadrillage</string>
+          </void>
+          <void method="add">
+           <string>Source_0_A_FftCursors</string>
+          </void>
+          <void method="add">
+           <string>Source_0_MeasureAreaAcqui</string>
+          </void>
+          <void method="add">
+           <string>Source_0Curseur_SCROLLING</string>
+          </void>
+         </object>
+        </void>
+        <void property="dimensionsId">
+         <array class="java.lang.String" length="2">
+          <void index="0">
+           <string>D_profondeurNum</string>
+          </void>
+          <void index="1">
+           <string>D_amplitude</string>
+          </void>
+         </array>
+        </void>
+        <void property="layersUsedForInterval">
+         <array class="java.lang.String" length="1">
+          <void index="0">
+           <string>Source_0Ascan</string>
+          </void>
+         </array>
+        </void>
+       </void>
+       <void method="addPropertyChangeListener">
+        <object idref="DPanelView2D_M2K1"/>
+       </void>
+       <void method="addPropertyChangeListener">
+        <object idref="DPanelView2D_M2K1"/>
+       </void>
+       <void method="addPropertyChangeListener">
+        <object idref="DPanelView2D_M2K1"/>
+       </void>
+       <void method="addPropertyChangeListener">
+        <object idref="DPanelView2D_M2K1"/>
+       </void>
+       <void method="addPropertyChangeListener">
+        <object idref="DPanelView2D_M2K1"/>
+       </void>
+       <void method="addPropertyChangeListener">
+        <object idref="DPanelView2D_M2K1"/>
+       </void>
+       <void method="addPropertyChangeListener">
+        <object idref="DPanelView2D_M2K1"/>
+       </void>
+       <void method="addPropertyChangeListener">
+        <object idref="DPanelView2D_M2K1"/>
+       </void>
+       <void method="addPropertyChangeListener">
+        <object idref="DPanelView2D_M2K1"/>
+       </void>
+      </object>
+      <string>Center</string>
+     </void>
+     <void method="add">
+      <object class="fr.m2m.javax.swing.M2mJPanel" id="M2mJPanel1">
+       <void property="layout">
+        <object class="javax.swing.BoxLayout">
+         <object idref="M2mJPanel1"/>
+         <int>1</int>
+        </object>
+       </void>
+      </object>
+      <string>South</string>
+     </void>
+     <void property="iconVisible">
+      <boolean>true</boolean>
+     </void>
+     <void property="labelDataItemName">
+      <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_16/labelPositionValeur0</string>
+     </void>
+     <void property="panelView2D">
+      <object idref="DPanelView2D1"/>
+     </void>
+     <void property="progressDataItemName">
+      <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_16/progressBar</string>
+     </void>
+     <void property="titleDataItemName">
+      <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_16/titleMaskNone</string>
+     </void>
+     <void property="visitable">
+      <array class="java.lang.Object" length="19">
+       <void index="0">
+        <object class="fr.deli.ibviewer.IbImmConsumerAdapter">
+         <void property="dataItemName">
+          <string>/fr.multi2000.sourcemanager.TableModelSource/Source_0_16/nbConsumers</string>
+         </void>
+        </object>
+       </void>
+       <void index="1">
+        <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+         <void property="dataItemName">
+          <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_16/progressBar</string>
+         </void>
+        </object>
+       </void>
+       <void index="2">
+        <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+         <void property="dataItemName">
+          <string>fr.multi2000.acquisitionextend.ScenarioEx@4/enAcquisition</string>
+         </void>
+         <void property="panelView">
+          <object idref="DPanelView2D_M2K1"/>
+         </void>
+        </object>
+       </void>
+       <void index="3">
+        <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+         <void property="dataItemName">
+          <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_16/progressBar</string>
+         </void>
+        </object>
+       </void>
+       <void index="4">
+        <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+         <void property="dataItemName">
+          <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+         </void>
+         <void property="panelView">
+          <object idref="DPanelView2D_M2K1"/>
+         </void>
+        </object>
+       </void>
+       <void index="5">
+        <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+         <void property="dataItemName">
+          <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_16/progressBar</string>
+         </void>
+        </object>
+       </void>
+       <void index="6">
+        <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+         <void property="dataItemName">
+          <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+         </void>
+         <void property="panelView">
+          <object idref="DPanelView2D_M2K1"/>
+         </void>
+        </object>
+       </void>
+       <void index="7">
+        <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+         <void property="dataItemName">
+          <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_16/progressBar</string>
+         </void>
+        </object>
+       </void>
+       <void index="8">
+        <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+         <void property="dataItemName">
+          <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+         </void>
+         <void property="panelView">
+          <object idref="DPanelView2D_M2K1"/>
+         </void>
+        </object>
+       </void>
+       <void index="9">
+        <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+         <void property="dataItemName">
+          <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_16/progressBar</string>
+         </void>
+        </object>
+       </void>
+       <void index="10">
+        <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+         <void property="dataItemName">
+          <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+         </void>
+         <void property="panelView">
+          <object idref="DPanelView2D_M2K1"/>
+         </void>
+        </object>
+       </void>
+       <void index="11">
+        <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+         <void property="dataItemName">
+          <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_16/progressBar</string>
+         </void>
+        </object>
+       </void>
+       <void index="12">
+        <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+         <void property="dataItemName">
+          <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+         </void>
+         <void property="panelView">
+          <object idref="DPanelView2D_M2K1"/>
+         </void>
+        </object>
+       </void>
+       <void index="13">
+        <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+         <void property="dataItemName">
+          <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_16/progressBar</string>
+         </void>
+        </object>
+       </void>
+       <void index="14">
+        <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+         <void property="dataItemName">
+          <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+         </void>
+         <void property="panelView">
+          <object idref="DPanelView2D_M2K1"/>
+         </void>
+        </object>
+       </void>
+       <void index="15">
+        <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+         <void property="dataItemName">
+          <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_16/progressBar</string>
+         </void>
+        </object>
+       </void>
+       <void index="16">
+        <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+         <void property="dataItemName">
+          <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+         </void>
+         <void property="panelView">
+          <object idref="DPanelView2D_M2K1"/>
+         </void>
+        </object>
+       </void>
+       <void index="17">
+        <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+         <void property="dataItemName">
+          <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_16/progressBar</string>
+         </void>
+        </object>
+       </void>
+       <void index="18">
+        <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+         <void property="dataItemName">
+          <string>fr.multi2000.acquisitionextend.ScenarioEx@4/enAcquisition</string>
+         </void>
+         <void property="panelView">
+          <object idref="DPanelView2D_M2K1"/>
+         </void>
+        </object>
+       </void>
+      </array>
+     </void>
+    </object>
+   </object>
+   <double>0.5</double>
+  </object>
+  <object class="fr.m2m.panels.DndDivisiblePanel">
+   <object class="fr.multi2000.acquisitionviewer.DPanelView2D_M2K" id="DPanelView2D_M2K2">
+    <void method="add">
+     <object class="fr.deli.graphic.awt2d.implextend.DPanelView2D" id="DPanelView2D2">
+      <void property="background">
+       <object class="java.awt.Color">
+        <int>154</int>
+        <int>156</int>
+        <int>173</int>
+        <int>255</int>
+       </object>
+      </void>
+      <void property="autoSizeMarges">
+       <boolean>false</boolean>
+      </void>
+      <void property="selectedIndex">
+       <array class="int" length="3">
+        <void index="0">
+         <int>-1</int>
+        </void>
+        <void index="1">
+         <int>-1</int>
+        </void>
+        <void index="2">
+         <int>-1</int>
+        </void>
+       </array>
+      </void>
+      <void property="unitGroups">
+       <array class="java.lang.String" length="3">
+        <void index="0">
+         <string>G_temps</string>
+        </void>
+        <void index="1">
+         <string>G_sequence</string>
+        </void>
+        <void index="2">
+         <string>G_amplitude</string>
+        </void>
+       </array>
+      </void>
+      <void id="PanelViewImpl2DEx2" property="vue">
+       <void id="InteractorArray2" property="currentInteractors">
+        <void index="1">
+         <void property="layersChangeable">
+          <object class="java.util.Vector">
+           <void method="add">
+            <string>Source_0CurseurWrapper_Source_0_3</string>
+           </void>
+          </object>
+         </void>
+        </void>
+       </void>
+       <void property="currentInteractors">
+        <object idref="InteractorArray2"/>
+       </void>
+       <void property="dataItemName">
+        <string>/graphicBag</string>
+       </void>
+       <void property="selectedLayers">
+        <object class="java.util.ArrayList">
+         <void method="add">
+          <string>Source_0Cscan (X,Seq,Amplitude)</string>
+         </void>
+         <void method="add">
+          <string>Source_0CurseurWrapper_Source_0_3</string>
+         </void>
+         <void method="add">
+          <string>Source_0_MeasureAreaAcqui</string>
+         </void>
+         <void method="add">
+          <string>Source_0Curseur_SCROLLING</string>
+         </void>
+        </object>
+       </void>
+       <void property="dimensionsId">
+        <array class="java.lang.String" length="3">
+         <void index="0">
+          <string>D_temps</string>
+         </void>
+         <void index="1">
+          <string>D_numSequence</string>
+         </void>
+         <void index="2">
+          <string>D_amplitude</string>
+         </void>
+        </array>
+       </void>
+       <void property="layersUsedForInterval">
+        <array class="java.lang.String" length="1">
+         <void index="0">
+          <string>Source_0Cscan (X,Seq,Amplitude)</string>
+         </void>
+        </array>
+       </void>
+      </void>
+      <void method="addPropertyChangeListener">
+       <object idref="DPanelView2D_M2K2"/>
+      </void>
+      <void method="addPropertyChangeListener">
+       <object idref="DPanelView2D_M2K2"/>
+      </void>
+      <void method="addPropertyChangeListener">
+       <object idref="DPanelView2D_M2K2"/>
+      </void>
+      <void method="addPropertyChangeListener">
+       <object idref="DPanelView2D_M2K2"/>
+      </void>
+      <void method="addPropertyChangeListener">
+       <object idref="DPanelView2D_M2K2"/>
+      </void>
+      <void method="addPropertyChangeListener">
+       <object idref="DPanelView2D_M2K2"/>
+      </void>
+      <void method="addPropertyChangeListener">
+       <object idref="DPanelView2D_M2K2"/>
+      </void>
+      <void method="addPropertyChangeListener">
+       <object idref="DPanelView2D_M2K2"/>
+      </void>
+      <void method="addPropertyChangeListener">
+       <object idref="DPanelView2D_M2K2"/>
+      </void>
+     </object>
+     <string>Center</string>
+    </void>
+    <void method="add">
+     <object class="fr.m2m.javax.swing.M2mJPanel" id="M2mJPanel2">
+      <void property="layout">
+       <object class="javax.swing.BoxLayout">
+        <object idref="M2mJPanel2"/>
+        <int>1</int>
+       </object>
+      </void>
+     </object>
+     <string>South</string>
+    </void>
+    <void property="iconVisible">
+     <boolean>true</boolean>
+    </void>
+    <void property="labelDataItemName">
+     <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_3/labelPositionValeur0</string>
+    </void>
+    <void property="panelView2D">
+     <object idref="DPanelView2D2"/>
+    </void>
+    <void property="progressDataItemName">
+     <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_3/progressBar</string>
+    </void>
+    <void property="titleDataItemName">
+     <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_3/titleMaskNone</string>
+    </void>
+    <void property="visitable">
+     <array class="java.lang.Object" length="19">
+      <void index="0">
+       <object class="fr.deli.ibviewer.IbImmConsumerAdapter">
+        <void property="dataItemName">
+         <string>/fr.multi2000.sourcemanager.TableModelSource/Source_0_3/nbConsumers</string>
+        </void>
+       </object>
+      </void>
+      <void index="1">
+       <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+        <void property="dataItemName">
+         <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_3/progressBar</string>
+        </void>
+       </object>
+      </void>
+      <void index="2">
+       <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+        <void property="dataItemName">
+         <string>fr.multi2000.acquisitionextend.ScenarioEx@4/enAcquisition</string>
+        </void>
+        <void property="panelView">
+         <object idref="DPanelView2D_M2K2"/>
+        </void>
+       </object>
+      </void>
+      <void index="3">
+       <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+        <void property="dataItemName">
+         <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_3/progressBar</string>
+        </void>
+       </object>
+      </void>
+      <void index="4">
+       <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+        <void property="dataItemName">
+         <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+        </void>
+        <void property="panelView">
+         <object idref="DPanelView2D_M2K2"/>
+        </void>
+       </object>
+      </void>
+      <void index="5">
+       <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+        <void property="dataItemName">
+         <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_3/progressBar</string>
+        </void>
+       </object>
+      </void>
+      <void index="6">
+       <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+        <void property="dataItemName">
+         <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+        </void>
+        <void property="panelView">
+         <object idref="DPanelView2D_M2K2"/>
+        </void>
+       </object>
+      </void>
+      <void index="7">
+       <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+        <void property="dataItemName">
+         <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_3/progressBar</string>
+        </void>
+       </object>
+      </void>
+      <void index="8">
+       <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+        <void property="dataItemName">
+         <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+        </void>
+        <void property="panelView">
+         <object idref="DPanelView2D_M2K2"/>
+        </void>
+       </object>
+      </void>
+      <void index="9">
+       <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+        <void property="dataItemName">
+         <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_3/progressBar</string>
+        </void>
+       </object>
+      </void>
+      <void index="10">
+       <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+        <void property="dataItemName">
+         <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+        </void>
+        <void property="panelView">
+         <object idref="DPanelView2D_M2K2"/>
+        </void>
+       </object>
+      </void>
+      <void index="11">
+       <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+        <void property="dataItemName">
+         <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_3/progressBar</string>
+        </void>
+       </object>
+      </void>
+      <void index="12">
+       <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+        <void property="dataItemName">
+         <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+        </void>
+        <void property="panelView">
+         <object idref="DPanelView2D_M2K2"/>
+        </void>
+       </object>
+      </void>
+      <void index="13">
+       <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+        <void property="dataItemName">
+         <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_3/progressBar</string>
+        </void>
+       </object>
+      </void>
+      <void index="14">
+       <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+        <void property="dataItemName">
+         <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+        </void>
+        <void property="panelView">
+         <object idref="DPanelView2D_M2K2"/>
+        </void>
+       </object>
+      </void>
+      <void index="15">
+       <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+        <void property="dataItemName">
+         <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_3/progressBar</string>
+        </void>
+       </object>
+      </void>
+      <void index="16">
+       <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+        <void property="dataItemName">
+         <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+        </void>
+        <void property="panelView">
+         <object idref="DPanelView2D_M2K2"/>
+        </void>
+       </object>
+      </void>
+      <void index="17">
+       <object class="fr.multi2000.m2kvisuviewer.ProgressConsumer">
+        <void property="dataItemName">
+         <string>fr.multi2000.sourcemanager.TableModelSource/Source_0_3/progressBar</string>
+        </void>
+       </object>
+      </void>
+      <void index="18">
+       <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+        <void property="dataItemName">
+         <string>fr.multi2000.acquisitionextend.ScenarioEx@4/enAcquisition</string>
+        </void>
+        <void property="panelView">
+         <object idref="DPanelView2D_M2K2"/>
+        </void>
+       </object>
+      </void>
+     </array>
+    </void>
+   </object>
+  </object>
+  <double>0.499455930359086</double>
+ </object>
+</java>

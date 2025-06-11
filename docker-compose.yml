@@ -1,0 +1,8 @@
+services:
+  jupyterlite:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./notebooks:/app/notebooks
+    restart: unless-stopped 

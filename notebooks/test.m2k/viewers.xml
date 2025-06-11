@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE DynamicViewers PUBLIC "-//FR.MULTI2000//DTD dynamicviewers.dynamicViewers_1_0//FR" "dynamicViewers_1_0.dtd" >
+<DynamicViewers viewerSelected="0">
+  <DynamicViewer viewerName="New screen (1)" viewerFileName="screen1.xml"/>
+</DynamicViewers>

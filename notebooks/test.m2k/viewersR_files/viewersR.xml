@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE SourceManagerR PUBLIC "-//FR.MULTI2000//DTD sourcemanagerr.sourcemanagerr//FR" "sourcemanagerr.dtd" >
+<SourceManagerR>
+  <SourceR channelDoubleValue="0.5" idString="Source_0" shotId="113" sequenceRecDoubleValue="1.0" name="Source 0" tscanY="30" tscanX="167" alias="Source 1" tscanXDoubleValue="113.96035805626595" salvoDisplayed="true;" shotDoubleValue="113.5" sequenceDoubleValue="1.0" signalDoubleValue="1.0" tscanYDoubleValue="30.0" depthDoubleValue="898.5"/>
+</SourceManagerR>

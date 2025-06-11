@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE ManagerGradientPalette PUBLIC "-//FR.MULTI2000//DTD managergradientpalette.managergradientpalette//FR" "managergradientpalette.dtd" >
+<ManagerGradientPalette>
+  <GradientPaletteDefault>
+    <GradientPalette seuilOrigine="-32768.0" nbPlages="64" rangeMax="32767" seuilMax="32767.0" inputRange="UNDEFINED" rangeMin="-32768" nom="palettedefaut">
+      <GradientSegmentXml seuil2="0.25" color2="java.awt.Color[r=51,g=255,b=255]" color1="blue"/>
+      <GradientSegmentXml seuil2="0.5" seuil1="0.25" color2="java.awt.Color[r=51,g=255,b=51]" color1="java.awt.Color[r=51,g=255,b=255]"/>
+      <GradientSegmentXml seuil2="0.75" seuil1="0.5" color2="red" color1="java.awt.Color[r=51,g=255,b=51]"/>
+      <GradientSegmentXml seuil1="0.75" color2="red" color1="red"/>
+      <ParticularValuesXml indice="1" color="white"/>
+      <ParticularValuesXml indice="2" color="black"/>
+      <ParticularValuesXml indice="4" color="black"/>
+      <ParticularValuesXml indice="3" color="black"/>
+    </GradientPalette>
+    <GradientPalette seuilOrigine="-32768.0" nbPlages="64" rangeMax="32767" seuilMax="32767.0" inputRange="UNDEFINED" rangeMin="-32768" nom="colorsMap">
+      <GradientSegmentXml seuil2="0.25" color2="java.awt.Color[r=51,g=255,b=255]" color1="blue"/>
+      <GradientSegmentXml seuil2="0.5" seuil1="0.25" color2="java.awt.Color[r=51,g=255,b=51]" color1="java.awt.Color[r=51,g=255,b=255]"/>
+      <GradientSegmentXml seuil2="0.75" seuil1="0.5" color2="red" color1="java.awt.Color[r=51,g=255,b=51]"/>
+      <GradientSegmentXml seuil1="0.75" color2="red" color1="red"/>
+      <ParticularValuesXml indice="1" color="white"/>
+      <ParticularValuesXml indice="2" color="black"/>
+      <ParticularValuesXml indice="4" color="black"/>
+      <ParticularValuesXml indice="3" color="black"/>
+    </GradientPalette>
+    <GradientPalette seuilOrigine="-32768.0" nbPlages="64" rangeMax="32767" seuilMax="32767.0" inputRange="UNDEFINED" rangeMin="-32768" nom="greysMap">
+      <GradientSegmentXml/>
+    </GradientPalette>
+    <GradientPalette seuilOrigine="-32768.0" nbPlages="64" rangeMax="32767" seuilMax="32767.0" inputRange="UNDEFINED" symetrique="false" rangeMin="-32768" nom="paletteProfNum">
+      <GradientSegmentXml/>
+    </GradientPalette>
+    <GradientPalette seuilOrigine="-32768.0" nbPlages="64" seuilMax="32767.0" inputRange="UNDEFINED" nom="dbGreysMap">
+      <GradientSegmentXml seuil2="0.015848899260163307" color2="black"/>
+      <GradientSegmentXml seuil2="0.03162270039319992" seuil1="0.015848899260163307" color2="java.awt.Color[r=43,g=43,b=43]" color1="java.awt.Color[r=43,g=43,b=43]"/>
+      <GradientSegmentXml seuil2="0.06309570372104645" seuil1="0.03162270039319992" color2="java.awt.Color[r=85,g=85,b=85]" color1="java.awt.Color[r=85,g=85,b=85]"/>
+      <GradientSegmentXml seuil2="0.1258925050497055" seuil1="0.06309570372104645" color2="gray" color1="gray"/>
+      <GradientSegmentXml seuil2="0.25118860602378845" seuil1="0.1258925050497055" color2="java.awt.Color[r=170,g=170,b=170]" color1="java.awt.Color[r=170,g=170,b=170]"/>
+      <GradientSegmentXml seuil2="0.5011872053146362" seuil1="0.25118860602378845" color2="java.awt.Color[r=213,g=213,b=213]" color1="java.awt.Color[r=213,g=213,b=213]"/>
+      <GradientSegmentXml seuil1="0.5011872053146362" color1="white"/>
+    </GradientPalette>
+    <GradientPalette seuilOrigine="-32768.0" nbPlages="64" seuilMax="32767.0" inputRange="UNDEFINED" nom="dbColorsMap">
+      <GradientSegmentXml seuil2="0.015848899260163307" color2="blue" color1="blue"/>
+      <GradientSegmentXml seuil2="0.03162270039319992" seuil1="0.015848899260163307" color2="java.awt.Color[r=0,g=236,b=249]" color1="java.awt.Color[r=0,g=236,b=249]"/>
+      <GradientSegmentXml seuil2="0.06309570372104645" seuil1="0.03162270039319992" color2="java.awt.Color[r=37,g=249,b=0]" color1="java.awt.Color[r=37,g=249,b=0]"/>
+      <GradientSegmentXml seuil2="0.1258925050497055" seuil1="0.06309570372104645" color2="java.awt.Color[r=168,g=249,b=0]" color1="java.awt.Color[r=168,g=249,b=0]"/>
+      <GradientSegmentXml seuil2="0.25118860602378845" seuil1="0.1258925050497055" color2="java.awt.Color[r=242,g=249,b=0]" color1="java.awt.Color[r=242,g=249,b=0]"/>
+      <GradientSegmentXml seuil2="0.5011872053146362" seuil1="0.25118860602378845" color2="java.awt.Color[r=249,g=162,b=0]" color1="java.awt.Color[r=249,g=162,b=0]"/>
+      <GradientSegmentXml seuil1="0.5011872053146362" color2="red" color1="red"/>
+    </GradientPalette>
+    <GradientPalette seuilOrigine="-32768.0" nbPlages="64" rangeMax="32767" seuilMax="32767.0" inputRange="UNDEFINED" symetrique="false" rangeMin="-32768" nom="palettefft">
+      <GradientSegmentXml/>
+    </GradientPalette>
+    <GradientPalette seuilOrigine="-32005.0" nbPlages="64" rangeMax="32005" seuilMax="32005.0" inputRange="UNDEFINED" symetrique="false" rangeMin="-32005" nom="paletteliss">
+      <GradientSegmentXml seuil2="0.5" color2="black" color1="red"/>
+      <GradientSegmentXml seuil1="0.5" color2="yellow"/>
+    </GradientPalette>
+    <GradientPalette seuilOrigine="-32005.0" nbPlages="64" rangeMax="32005" seuilMax="32005.0" inputRange="UNDEFINED" symetrique="false" rangeMin="-32005" nom="palettelissEtalonage">
+      <GradientSegmentXml seuil2="0.5" color2="black" color1="blue"/>
+      <GradientSegmentXml seuil1="0.5" color2="green"/>
+    </GradientPalette>
+    <GradientPalette seuilOrigine="0.0" dimensionsId="D_amplitude;D_color;" nbPlages="64" rangeMax="32767" seuilMax="32767.0" inputRange="UNDEFINED" symetrique="false" nom="dbAttenuation">
+      <GradientSegmentXml seuil2="0.3125" color2="java.awt.Color[r=0,g=51,b=255]" color1="java.awt.Color[r=204,g=255,b=255]"/>
+      <GradientSegmentXml seuil2="0.546999990940094" seuil1="0.3125" color2="java.awt.Color[r=51,g=153,b=0]" color1="java.awt.Color[r=204,g=255,b=102]"/>
+      <GradientSegmentXml seuil1="0.546999990940094" color2="red" color1="yellow"/>
+      <ParticularValuesXml indice="1" color="white"/>
+      <ParticularValuesXml indice="2" color="black"/>
+      <ParticularValuesXml indice="4" color="black"/>
+      <ParticularValuesXml indice="3" color="black"/>
+    </GradientPalette>
+  </GradientPaletteDefault>
+  <GradientPaletteSourceAcqui>
+    <GradientPalette seuilOrigine="0.0" dimensionsId="D_amplitude;D_color;" redresse="true" nbPlages="64" rangeMax="32767" seuilMax="32767.0" inputRange="UNDEFINED" symetrique="false" nom="Source_0_A_ATT">
+      <GradientSegmentXml seuil2="0.3125" color2="java.awt.Color[r=0,g=51,b=255]" color1="java.awt.Color[r=204,g=255,b=255]"/>
+      <GradientSegmentXml seuil2="0.546999990940094" seuil1="0.3125" color2="java.awt.Color[r=51,g=153,b=0]" color1="java.awt.Color[r=204,g=255,b=102]"/>
+      <GradientSegmentXml seuil1="0.546999990940094" color2="red" color1="yellow"/>
+      <ParticularValuesXml indice="1" color="white"/>
+      <ParticularValuesXml indice="2" color="black"/>
+      <ParticularValuesXml indice="4" color="black"/>
+      <ParticularValuesXml indice="3" color="black"/>
+    </GradientPalette>
+    <GradientPalette seuilOrigine="0.0" dimensionsId="D_profondeurNum;D_color;" nbPlages="64" rangeMax="406" seuilMax="406.0" inputRange="UNDEFINED" symetrique="false" nom="Source_0_A_D">
+      <GradientSegmentXml/>
+      <ParticularValuesXml indice="32767" color="white"/>
+      <ParticularValuesXml indice="32766" color="black"/>
+      <ParticularValuesXml indice="32764" color="black"/>
+      <ParticularValuesXml indice="32765" color="black"/>
+    </GradientPalette>
+    <GradientPalette seuilOrigine="-32768.0" dimensionsId="D_distance_z_corrected_3d;D_color;" nbPlages="64" rangeMax="32760" seuilMax="32760.0" inputRange="UNDEFINED" symetrique="false" rangeMin="-32768" nom="Source_0_A_P">
+      <GradientSegmentXml/>
+      <ParticularValuesXml indice="32767" color="white"/>
+      <ParticularValuesXml indice="32766" color="black"/>
+      <ParticularValuesXml indice="32764" color="black"/>
+      <ParticularValuesXml indice="32765" color="black"/>
+    </GradientPalette>
+    <GradientPalette seuilOrigine="-32768.0" dimensionsId="D_amplitude;D_color;" nbPlages="64" rangeMax="32767" seuilMax="32767.0" inputRange="UNDEFINED" rangeMin="-32768" nom="Source_1_A_A">
+      <GradientSegmentXml seuil2="0.25" color2="java.awt.Color[r=51,g=255,b=255]" color1="blue"/>
+      <GradientSegmentXml seuil2="0.5" seuil1="0.25" color2="java.awt.Color[r=51,g=255,b=51]" color1="java.awt.Color[r=51,g=255,b=255]"/>
+      <GradientSegmentXml seuil2="0.75" seuil1="0.5" color2="red" color1="java.awt.Color[r=51,g=255,b=51]"/>
+      <GradientSegmentXml seuil1="0.75" color2="red" color1="red"/>
+      <ParticularValuesXml indice="1" color="white"/>
+      <ParticularValuesXml indice="2" color="black"/>
+      <ParticularValuesXml indice="4" color="black"/>
+      <ParticularValuesXml indice="3" color="black"/>
+    </GradientPalette>
+    <GradientPalette seuilOrigine="0.0" dimensionsId="D_amplitude;D_color;" redresse="true" nbPlages="64" rangeMax="32767" seuilMax="32767.0" inputRange="UNDEFINED" symetrique="false" nom="Source_1_A_ATT">
+      <GradientSegmentXml seuil2="0.3125" color2="java.awt.Color[r=0,g=51,b=255]" color1="java.awt.Color[r=204,g=255,b=255]"/>
+      <GradientSegmentXml seuil2="0.546999990940094" seuil1="0.3125" color2="java.awt.Color[r=51,g=153,b=0]" color1="java.awt.Color[r=204,g=255,b=102]"/>
+      <GradientSegmentXml seuil1="0.546999990940094" color2="red" color1="yellow"/>
+      <ParticularValuesXml indice="1" color="white"/>
+      <ParticularValuesXml indice="2" color="black"/>
+      <ParticularValuesXml indice="4" color="black"/>
+      <ParticularValuesXml indice="3" color="black"/>
+    </GradientPalette>
+    <GradientPalette seuilOrigine="1528.0" dimensionsId="D_profondeurNum;D_color;" nbPlages="64" rangeMax="3736" seuilMax="3736.0" inputRange="UNDEFINED" symetrique="false" rangeMin="1528" nom="Source_1_A_D">
+      <GradientSegmentXml/>
+      <ParticularValuesXml indice="32767" color="white"/>
+      <ParticularValuesXml indice="32766" color="black"/>
+      <ParticularValuesXml indice="32764" color="black"/>
+      <ParticularValuesXml indice="32765" color="black"/>
+    </GradientPalette>
+    <GradientPalette seuilOrigine="-32768.0" dimensionsId="D_distance_z_corrected_3d;D_color;" nbPlages="64" rangeMax="32760" seuilMax="32760.0" inputRange="UNDEFINED" symetrique="false" rangeMin="-32768" nom="Source_1_A_P">
+      <GradientSegmentXml/>
+      <ParticularValuesXml indice="32767" color="white"/>
+      <ParticularValuesXml indice="32766" color="black"/>
+      <ParticularValuesXml indice="32764" color="black"/>
+      <ParticularValuesXml indice="32765" color="black"/>
+    </GradientPalette>
+    <GradientPalette seuilOrigine="0.0" dimensionsId="D_amplitude;D_color;" nbPlages="64" rangeMax="32767" seuilMax="3759.9898897058824" inputRange="UNDEFINED" rangeMin="-32768" nom="Source_0_A_A">
+      <GradientSegmentXml seuil2="0.25" color2="java.awt.Color[r=51,g=255,b=255]" color1="blue"/>
+      <GradientSegmentXml seuil2="0.5" seuil1="0.25" color2="java.awt.Color[r=51,g=255,b=51]" color1="java.awt.Color[r=51,g=255,b=255]"/>
+      <GradientSegmentXml seuil2="0.75" seuil1="0.5" color2="red" color1="java.awt.Color[r=51,g=255,b=51]"/>
+      <GradientSegmentXml seuil1="0.75" color2="red" color1="red"/>
+      <ParticularValuesXml indice="1" color="white"/>
+      <ParticularValuesXml indice="2" color="black"/>
+      <ParticularValuesXml indice="4" color="black"/>
+      <ParticularValuesXml indice="3" color="black"/>
+    </GradientPalette>
+  </GradientPaletteSourceAcqui>
+  <GradientPaletteSourceReglage>
+    <GradientPalette seuilOrigine="0.0" dimensionsId="D_amplitude;D_color;" nbPlages="64" rangeMax="32767" seuilMax="4075.37122066787" inputRange="UNDEFINED" rangeMin="-32768" nom="Source_0_R_A">
+      <GradientSegmentXml seuil2="0.25" color2="java.awt.Color[r=51,g=255,b=255]" color1="blue"/>
+      <GradientSegmentXml seuil2="0.5" seuil1="0.25" color2="java.awt.Color[r=51,g=255,b=51]" color1="java.awt.Color[r=51,g=255,b=255]"/>
+      <GradientSegmentXml seuil2="0.75" seuil1="0.5" color2="red" color1="java.awt.Color[r=51,g=255,b=51]"/>
+      <GradientSegmentXml seuil1="0.75" color2="red" color1="red"/>
+      <ParticularValuesXml indice="1" color="white"/>
+      <ParticularValuesXml indice="2" color="black"/>
+      <ParticularValuesXml indice="4" color="black"/>
+      <ParticularValuesXml indice="3" color="black"/>
+    </GradientPalette>
+    <GradientPalette seuilOrigine="-0.0" dimensionsId="D_gainFft;D_color;" nbPlages="64" rangeMax="32767" seuilMax="4095.0" inputRange="UNDEFINED" symetrique="false" rangeMin="-32768" nom="Source_0_R_FFT">
+      <GradientSegmentXml/>
+      <ParticularValuesXml indice="32767" color="white"/>
+      <ParticularValuesXml indice="32766" color="black"/>
+      <ParticularValuesXml indice="32764" color="black"/>
+      <ParticularValuesXml indice="32765" color="black"/>
+    </GradientPalette>
+  </GradientPaletteSourceReglage>
+</ManagerGradientPalette>

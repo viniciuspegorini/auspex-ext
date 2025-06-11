@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_202" class="java.beans.XMLDecoder">
+ <object class="fr.m2m.panels.DndDivisiblePanel">
+  <int>1</int>
+  <object class="fr.m2m.panels.DndDivisiblePanel">
+   <object class="fr.multi2000.acquisitionviewer.DPanelView2D_M2K" id="DPanelView2D_M2K0">
+    <void method="add">
+     <object class="fr.deli.graphic.awt2d.implextend.DPanelView2D" id="DPanelView2D0">
+      <void property="background">
+       <object class="java.awt.Color">
+        <int>154</int>
+        <int>156</int>
+        <int>173</int>
+        <int>255</int>
+       </object>
+      </void>
+      <void class="fr.deli.graphic.awt2d.implextend.DPanelView2D" method="getField">
+       <string>axisInsets</string>
+       <void method="set">
+        <object idref="DPanelView2D0"/>
+        <object class="java.awt.Insets">
+         <int>21</int>
+         <int>21</int>
+         <int>21</int>
+         <int>22</int>
+        </object>
+       </void>
+      </void>
+      <void property="autoSizeMarges">
+       <boolean>false</boolean>
+      </void>
+      <void property="axisInsetsStandard">
+       <object class="java.awt.Insets">
+        <int>21</int>
+        <int>21</int>
+        <int>21</int>
+        <int>22</int>
+       </object>
+      </void>
+      <void property="nbDigitAxeX">
+       <int>0</int>
+      </void>
+      <void property="nbDigitAxeY">
+       <int>0</int>
+      </void>
+      <void property="selectedIndex">
+       <array class="int" length="3">
+        <void index="0">
+         <int>-1</int>
+        </void>
+        <void index="1">
+         <int>-1</int>
+        </void>
+        <void index="2">
+         <int>-1</int>
+        </void>
+       </array>
+      </void>
+      <void property="unitGroups">
+       <array class="java.lang.String" length="3">
+        <void index="1">
+         <string>G_parcoursSonore</string>
+        </void>
+        <void index="2">
+         <string>G_amplitude</string>
+        </void>
+       </array>
+      </void>
+      <void id="PanelViewImpl2DEx0" property="vue">
+       <void id="InteractorArray0" property="currentInteractors">
+        <void index="1">
+         <void property="layersChangeable">
+          <object class="java.util.Vector">
+           <void method="add">
+            <string>Source_0_Curseur</string>
+           </void>
+           <void method="add">
+            <string>Source_0_Portes</string>
+           </void>
+           <void method="add">
+            <string>Source_0_R_FftCursors</string>
+           </void>
+          </object>
+         </void>
+        </void>
+       </void>
+       <void property="currentInteractors">
+        <object idref="InteractorArray0"/>
+       </void>
+       <void property="dataItemName">
+        <string>/graphicBag</string>
+       </void>
+       <void property="selectedLayers">
+        <object class="java.util.ArrayList">
+         <void method="add">
+          <string>Source_0</string>
+         </void>
+         <void method="add">
+          <string>Courbes</string>
+         </void>
+         <void method="add">
+          <string>Source_0_Curseur</string>
+         </void>
+         <void method="add">
+          <string>Source_0_MeasureArea</string>
+         </void>
+         <void method="add">
+          <string>Source_0_Portes</string>
+         </void>
+        </object>
+       </void>
+       <void property="dimensionsId">
+        <array class="java.lang.String" length="3">
+         <void index="0">
+          <string>D_numTir</string>
+         </void>
+         <void index="1">
+          <string>D_profondeurNum</string>
+         </void>
+         <void index="2">
+          <string>D_amplitude</string>
+         </void>
+        </array>
+       </void>
+       <void property="layersUsedForInterval">
+        <array class="java.lang.String" length="1">
+         <void index="0">
+          <string>Source_0</string>
+         </void>
+        </array>
+       </void>
+       <void property="positionOrigine">
+        <int>2</int>
+       </void>
+      </void>
+      <void method="addPropertyChangeListener">
+       <object idref="DPanelView2D_M2K0"/>
+      </void>
+      <void method="addPropertyChangeListener">
+       <object idref="DPanelView2D_M2K0"/>
+      </void>
+      <void method="addPropertyChangeListener">
+       <object idref="DPanelView2D_M2K0"/>
+      </void>
+      <void method="addPropertyChangeListener">
+       <object idref="DPanelView2D_M2K0"/>
+      </void>
+      <void method="addPropertyChangeListener">
+       <object idref="DPanelView2D_M2K0"/>
+      </void>
+      <void method="addPropertyChangeListener">
+       <object idref="DPanelView2D_M2K0"/>
+      </void>
+      <void method="addPropertyChangeListener">
+       <object idref="DPanelView2D_M2K0"/>
+      </void>
+      <void method="addPropertyChangeListener">
+       <object idref="DPanelView2D_M2K0"/>
+      </void>
+     </object>
+     <string>Center</string>
+    </void>
+    <void method="add">
+     <object class="fr.m2m.javax.swing.M2mJPanel" id="M2mJPanel0">
+      <void property="layout">
+       <object class="javax.swing.BoxLayout">
+        <object idref="M2mJPanel0"/>
+        <int>1</int>
+       </object>
+      </void>
+     </object>
+     <string>South</string>
+    </void>
+    <void property="iconVisible">
+     <boolean>true</boolean>
+    </void>
+    <void property="panelView2D">
+     <object idref="DPanelView2D0"/>
+    </void>
+    <void property="titleDataItemName">
+     <string>fr.multi2000.sourcemanagerr.ConsumerType/Source_0_2/titleMaskNone</string>
+    </void>
+    <void property="visitable">
+     <array class="java.lang.Object" length="9">
+      <void index="0">
+       <object class="fr.deli.ibviewer.IbImmConsumerAdapter">
+        <void property="dataItemName">
+         <string>fr.multi2000.sourcemanager.ModelSourceR/Source_0_2/nbConsumers</string>
+        </void>
+       </object>
+      </void>
+      <void index="1">
+       <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+        <void property="dataItemName">
+         <string>fr.multi2000.acquisitionextend.ScenarioEx@2/enAcquisition</string>
+        </void>
+        <void property="panelView">
+         <object idref="DPanelView2D_M2K0"/>
+        </void>
+       </object>
+      </void>
+      <void index="2">
+       <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+        <void property="dataItemName">
+         <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+        </void>
+        <void property="panelView">
+         <object idref="DPanelView2D_M2K0"/>
+        </void>
+       </object>
+      </void>
+      <void index="3">
+       <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+        <void property="dataItemName">
+         <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+        </void>
+        <void property="panelView">
+         <object idref="DPanelView2D_M2K0"/>
+        </void>
+       </object>
+      </void>
+      <void index="4">
+       <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+        <void property="dataItemName">
+         <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+        </void>
+        <void property="panelView">
+         <object idref="DPanelView2D_M2K0"/>
+        </void>
+       </object>
+      </void>
+      <void index="5">
+       <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+        <void property="dataItemName">
+         <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+        </void>
+        <void property="panelView">
+         <object idref="DPanelView2D_M2K0"/>
+        </void>
+       </object>
+      </void>
+      <void index="6">
+       <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+        <void property="dataItemName">
+         <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+        </void>
+        <void property="panelView">
+         <object idref="DPanelView2D_M2K0"/>
+        </void>
+       </object>
+      </void>
+      <void index="7">
+       <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+        <void property="dataItemName">
+         <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+        </void>
+        <void property="panelView">
+         <object idref="DPanelView2D_M2K0"/>
+        </void>
+       </object>
+      </void>
+      <void index="8">
+       <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+        <void property="dataItemName">
+         <string>fr.multi2000.acquisitionextend.ScenarioEx@4/enAcquisition</string>
+        </void>
+        <void property="panelView">
+         <object idref="DPanelView2D_M2K0"/>
+        </void>
+       </object>
+      </void>
+     </array>
+    </void>
+   </object>
+  </object>
+  <object class="fr.m2m.panels.DndDivisiblePanel">
+   <object class="fr.multi2000.acquisitionviewer.DPanelView2D_M2K" id="DPanelView2D_M2K1">
+    <void method="add">
+     <object class="fr.deli.graphic.awt2d.implextend.DPanelView2D" id="DPanelView2D1">
+      <void property="background">
+       <object class="java.awt.Color">
+        <int>154</int>
+        <int>156</int>
+        <int>173</int>
+        <int>255</int>
+       </object>
+      </void>
+      <void class="fr.deli.graphic.awt2d.implextend.DPanelView2D" method="getField">
+       <string>axisInsets</string>
+       <void method="set">
+        <object idref="DPanelView2D1"/>
+        <object class="java.awt.Insets">
+         <int>21</int>
+         <int>21</int>
+         <int>21</int>
+         <int>22</int>
+        </object>
+       </void>
+      </void>
+      <void property="autoSizeMarges">
+       <boolean>false</boolean>
+      </void>
+      <void property="axisInsetsStandard">
+       <object class="java.awt.Insets">
+        <int>21</int>
+        <int>21</int>
+        <int>21</int>
+        <int>22</int>
+       </object>
+      </void>
+      <void property="nbDigitAxeX">
+       <int>0</int>
+      </void>
+      <void property="nbDigitAxeY">
+       <int>0</int>
+      </void>
+      <void property="selectedIndex">
+       <array class="int" length="2">
+        <void index="0">
+         <int>2</int>
+        </void>
+        <void index="1">
+         <int>1</int>
+        </void>
+       </array>
+      </void>
+      <void property="unitGroups">
+       <array class="java.lang.String" length="2">
+        <void index="0">
+         <string>G_parcoursSonore</string>
+        </void>
+        <void index="1">
+         <string>G_amplitude</string>
+        </void>
+       </array>
+      </void>
+      <void id="PanelViewImpl2DEx1" property="vue">
+       <void id="InteractorArray1" property="currentInteractors">
+        <void index="1">
+         <void property="layersChangeable">
+          <object class="java.util.Vector">
+           <void method="add">
+            <string>Quadrillage</string>
+           </void>
+           <void method="add">
+            <string>Source_0_Dac</string>
+           </void>
+           <void method="add">
+            <string>Source_0_Portes</string>
+           </void>
+           <void method="add">
+            <string>Source_0_Portes_MP</string>
+           </void>
+           <void method="add">
+            <string>Curseurs palette Source_0_R_A</string>
+           </void>
+           <void method="add">
+            <string>Source_0_R_FftCursors</string>
+           </void>
+           <void method="add">
+            <string>Source_0_Curseur</string>
+           </void>
+          </object>
+         </void>
+        </void>
+       </void>
+       <void property="currentInteractors">
+        <object idref="InteractorArray1"/>
+       </void>
+       <void property="dataItemName">
+        <string>/graphicBag</string>
+       </void>
+       <void property="selectedLayers">
+        <object class="java.util.ArrayList">
+         <void method="add">
+          <string>Source_0</string>
+         </void>
+         <void method="add">
+          <string>Quadrillage</string>
+         </void>
+         <void method="add">
+          <string>Source_0_Dac</string>
+         </void>
+         <void method="add">
+          <string>Source_0_Portes</string>
+         </void>
+         <void method="add">
+          <string>Source_0_Portes_MP</string>
+         </void>
+         <void method="add">
+          <string>Source_0_Curseur</string>
+         </void>
+         <void method="add">
+          <string>Source_0_MeasureArea</string>
+         </void>
+         <void method="add">
+          <string>Source_0_R_FftCursors</string>
+         </void>
+        </object>
+       </void>
+       <void property="dimensionsId">
+        <array class="java.lang.String" length="2">
+         <void index="0">
+          <string>D_profondeurNum</string>
+         </void>
+         <void index="1">
+          <string>D_amplitude</string>
+         </void>
+        </array>
+       </void>
+       <void property="layersUsedForInterval">
+        <array class="java.lang.String" length="1">
+         <void index="0">
+          <string>Source_0</string>
+         </void>
+        </array>
+       </void>
+      </void>
+      <void method="addPropertyChangeListener">
+       <object idref="DPanelView2D_M2K1"/>
+      </void>
+      <void method="addPropertyChangeListener">
+       <object idref="DPanelView2D_M2K1"/>
+      </void>
+      <void method="addPropertyChangeListener">
+       <object idref="DPanelView2D_M2K1"/>
+      </void>
+      <void method="addPropertyChangeListener">
+       <object idref="DPanelView2D_M2K1"/>
+      </void>
+      <void method="addPropertyChangeListener">
+       <object idref="DPanelView2D_M2K1"/>
+      </void>
+      <void method="addPropertyChangeListener">
+       <object idref="DPanelView2D_M2K1"/>
+      </void>
+      <void method="addPropertyChangeListener">
+       <object idref="DPanelView2D_M2K1"/>
+      </void>
+      <void method="addPropertyChangeListener">
+       <object idref="DPanelView2D_M2K1"/>
+      </void>
+     </object>
+     <string>Center</string>
+    </void>
+    <void method="add">
+     <object class="fr.m2m.javax.swing.M2mJPanel" id="M2mJPanel1">
+      <void property="layout">
+       <object class="javax.swing.BoxLayout">
+        <object idref="M2mJPanel1"/>
+        <int>1</int>
+       </object>
+      </void>
+     </object>
+     <string>South</string>
+    </void>
+    <void property="iconVisible">
+     <boolean>true</boolean>
+    </void>
+    <void property="panelView2D">
+     <object idref="DPanelView2D1"/>
+    </void>
+    <void property="titleDataItemName">
+     <string>fr.multi2000.sourcemanagerr.ConsumerType/Source_0_0/titleMaskNone</string>
+    </void>
+    <void property="visitable">
+     <array class="java.lang.Object" length="9">
+      <void index="0">
+       <object class="fr.deli.ibviewer.IbImmConsumerAdapter">
+        <void property="dataItemName">
+         <string>/fr.multi2000.sourcemanager.ModelSourceR/Source_0_0/nbConsumers</string>
+        </void>
+       </object>
+      </void>
+      <void index="1">
+       <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+        <void property="dataItemName">
+         <string>fr.multi2000.acquisitionextend.ScenarioEx@2/enAcquisition</string>
+        </void>
+        <void property="panelView">
+         <object idref="DPanelView2D_M2K1"/>
+        </void>
+       </object>
+      </void>
+      <void index="2">
+       <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+        <void property="dataItemName">
+         <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+        </void>
+        <void property="panelView">
+         <object idref="DPanelView2D_M2K1"/>
+        </void>
+       </object>
+      </void>
+      <void index="3">
+       <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+        <void property="dataItemName">
+         <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+        </void>
+        <void property="panelView">
+         <object idref="DPanelView2D_M2K1"/>
+        </void>
+       </object>
+      </void>
+      <void index="4">
+       <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+        <void property="dataItemName">
+         <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+        </void>
+        <void property="panelView">
+         <object idref="DPanelView2D_M2K1"/>
+        </void>
+       </object>
+      </void>
+      <void index="5">
+       <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+        <void property="dataItemName">
+         <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+        </void>
+        <void property="panelView">
+         <object idref="DPanelView2D_M2K1"/>
+        </void>
+       </object>
+      </void>
+      <void index="6">
+       <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+        <void property="dataItemName">
+         <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+        </void>
+        <void property="panelView">
+         <object idref="DPanelView2D_M2K1"/>
+        </void>
+       </object>
+      </void>
+      <void index="7">
+       <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+        <void property="dataItemName">
+         <string>fr.multi2000.acquisitionextend.ScenarioEx@3/enAcquisition</string>
+        </void>
+        <void property="panelView">
+         <object idref="DPanelView2D_M2K1"/>
+        </void>
+       </object>
+      </void>
+      <void index="8">
+       <object class="fr.multi2000.acquisitionviewer.EnAcquisitionCA">
+        <void property="dataItemName">
+         <string>fr.multi2000.acquisitionextend.ScenarioEx@4/enAcquisition</string>
+        </void>
+        <void property="panelView">
+         <object idref="DPanelView2D_M2K1"/>
+        </void>
+       </object>
+      </void>
+     </array>
+    </void>
+   </object>
+  </object>
+  <double>0.49969933854479853</double>
+ </object>
+</java>
