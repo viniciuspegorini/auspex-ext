@@ -4,6 +4,7 @@ import {
 } from '@jupyterlab/application';
 
 import { ICommandPalette, MainAreaWidget } from '@jupyterlab/apputils';
+import { ILauncher } from '@jupyterlab/launcher';
 
 import { Widget } from '@lumino/widgets';
 
@@ -16,8 +17,13 @@ const plugin: JupyterFrontEndPlugin<void> = {
   description: 'A JupyterLab extension for AUSPEX framework.',
   autoStart: true,
   requires: [ICommandPalette],
-  activate: async (app: JupyterFrontEnd, palette: ICommandPalette) => {
-    console.log('AUSPEX extension is activated!');
+  optional: [ILauncher],
+  activate: async (
+    app: JupyterFrontEnd, 
+    palette: ICommandPalette,
+    launcher: ILauncher | null
+  ) => {
+    console.log('AUSPEX extension is activated! - 1');
 
     
     // Define a widget creator function,
@@ -36,7 +42,8 @@ const plugin: JupyterFrontEndPlugin<void> = {
     // Add an application command
     const command: string = 'ext-auxpex:open';
     app.commands.addCommand(command, {
-      label: 'Open AUSPEX Extension',
+      label: 'AUSPEX',
+      caption: 'Open AUSPEX Extension',
       execute: () => {
         // Regenerate the widget if disposed
         if (widget.isDisposed) {
@@ -53,6 +60,15 @@ const plugin: JupyterFrontEndPlugin<void> = {
 
     // Add the command to the palette.
     palette.addItem({ command, category: 'Tutorial' });
+
+    // Add the command to the launcher
+    if (launcher) {
+      launcher.add({
+        command,
+        category: 'Other',
+        rank: 1
+      });
+    }
   }
 };
 
