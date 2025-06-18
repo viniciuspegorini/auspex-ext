@@ -2007,7 +2007,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jupyterlab/application@npm:^4.4.3":
+"@jupyterlab/application@npm:^4.0.7, @jupyterlab/application@npm:^4.4.3":
   version: 4.4.3
   resolution: "@jupyterlab/application@npm:4.4.3"
   dependencies:
@@ -2035,7 +2035,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jupyterlab/apputils@npm:^4.5.3":
+"@jupyterlab/apputils@npm:^4.1.3, @jupyterlab/apputils@npm:^4.5.3":
   version: 4.5.3
   resolution: "@jupyterlab/apputils@npm:4.5.3"
   dependencies:
@@ -2119,7 +2119,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jupyterlab/cells@npm:^4.4.3":
+"@jupyterlab/cells@npm:^4.0.7, @jupyterlab/cells@npm:^4.4.3":
   version: 4.4.3
   resolution: "@jupyterlab/cells@npm:4.4.3"
   dependencies:
@@ -2333,7 +2333,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jupyterlab/launcher@npm:^4.4.3":
+"@jupyterlab/launcher@npm:^4.0.7":
   version: 4.4.3
   resolution: "@jupyterlab/launcher@npm:4.4.3"
   dependencies:
@@ -2383,7 +2383,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jupyterlab/notebook@npm:^4.4.3":
+"@jupyterlab/notebook@npm:^4.0.7, @jupyterlab/notebook@npm:^4.4.3":
   version: 4.4.3
   resolution: "@jupyterlab/notebook@npm:4.4.3"
   dependencies:
@@ -2434,7 +2434,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jupyterlab/outputarea@npm:^4.4.3":
+"@jupyterlab/outputarea@npm:^4.0.7, @jupyterlab/outputarea@npm:^4.4.3":
   version: 4.4.3
   resolution: "@jupyterlab/outputarea@npm:4.4.3"
   dependencies:
@@ -2466,7 +2466,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jupyterlab/rendermime@npm:^4.4.3":
+"@jupyterlab/rendermime@npm:^4.0.7, @jupyterlab/rendermime@npm:^4.4.3":
   version: 4.4.3
   resolution: "@jupyterlab/rendermime@npm:4.4.3"
   dependencies:
@@ -2486,7 +2486,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jupyterlab/services@npm:^7.4.3":
+"@jupyterlab/services@npm:^7.0.7, @jupyterlab/services@npm:^7.4.3":
   version: 7.4.3
   resolution: "@jupyterlab/services@npm:7.4.3"
   dependencies:
@@ -2944,7 +2944,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lumino/widgets@npm:^1.37.2 || ^2.7.1, @lumino/widgets@npm:^2.7.1":
+"@lumino/widgets@npm:^1.37.2 || ^2.7.1, @lumino/widgets@npm:^2.3.0, @lumino/widgets@npm:^2.7.1":
   version: 2.7.1
   resolution: "@lumino/widgets@npm:2.7.1"
   dependencies:
@@ -3957,12 +3957,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "auspex-extension@workspace:."
   dependencies:
-    "@jupyterlab/application": ^4.4.3
-    "@jupyterlab/apputils": ^4.5.3
+    "@jupyterlab/application": ^4.0.7
+    "@jupyterlab/apputils": ^4.1.3
     "@jupyterlab/builder": ^4.0.0
-    "@jupyterlab/launcher": ^4.4.3
+    "@jupyterlab/cells": ^4.0.7
+    "@jupyterlab/launcher": ^4.0.7
+    "@jupyterlab/notebook": ^4.0.7
+    "@jupyterlab/outputarea": ^4.0.7
+    "@jupyterlab/rendermime": ^4.0.7
+    "@jupyterlab/services": ^7.0.7
     "@jupyterlab/testutils": ^4.0.0
-    "@lumino/widgets": ^2.7.1
+    "@lumino/widgets": ^2.3.0
     "@types/jest": ^29.2.0
     "@types/json-schema": ^7.0.11
     "@types/react": ^18.0.26
@@ -3976,7 +3981,7 @@ __metadata:
     jest: ^29.2.0
     npm-run-all2: ^7.0.1
     prettier: ^3.0.0
-    react: ^19.1.0
+    react: ^18.2.0
     rimraf: ^5.0.1
     source-map-loader: ^1.0.2
     style-loader: ^3.3.1
@@ -8048,13 +8053,6 @@ __metadata:
   dependencies:
     loose-envify: ^1.1.0
   checksum: a27bcfa8ff7c15a1e50244ad0d0c1cb2ad4375eeffefd266a64889beea6f6b64c4966c9b37d14ee32d6c9fcd5aa6ba183b6988167ab4d127d13e7cb5b386a376
-  languageName: node
-  linkType: hard
-
-"react@npm:^19.1.0":
-  version: 19.1.0
-  resolution: "react@npm:19.1.0"
-  checksum: c0905f8cfb878b0543a5522727e5ed79c67c8111dc16ceee135b7fe19dce77b2c1c19293513061a8934e721292bfc1517e0487e262d1906f306bdf95fa54d02f
   languageName: node
   linkType: hard
 
