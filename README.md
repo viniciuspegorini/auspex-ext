@@ -2,6 +2,9 @@
 
 This repository contains a Docker setup for running JupyterLite, a lightweight version of Jupyter that runs entirely in the browser.
 
+## Download do conda
+https://conda-forge.org/download/
+
 ## Requirements
 
 - Docker
@@ -98,3 +101,5 @@ Para atualizar o build da extensão
 ```bash
 jlpm run build
 ```
+
+Considerando a pasta auspex-extensiom que é uma extensão Jupiterlite. A função hello dentro do arquivo pyton do arquivo index não está sendo executada

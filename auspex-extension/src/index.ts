@@ -8,7 +8,7 @@ import { ILauncher } from '@jupyterlab/launcher';
 import { Widget } from '@lumino/widgets';
 import { OutputArea, OutputAreaModel } from '@jupyterlab/outputarea';
 import { RenderMimeRegistry } from '@jupyterlab/rendermime';
-import { ServiceManager, KernelMessage } from '@jupyterlab/services';
+import { ServiceManager } from '@jupyterlab/services';
 
 /**
  * Initialization data for the auspex-extension extension.
@@ -24,7 +24,7 @@ const plugin: JupyterFrontEndPlugin<void> = {
     palette: ICommandPalette,
     launcher: ILauncher | null
   ) => {
-    console.log('AUSPEX extension is activated! - 1');
+    console.log('AUSPEX extension is activated! - 4');
 
     // Create a service manager
     const manager = new ServiceManager();
@@ -42,7 +42,7 @@ const plugin: JupyterFrontEndPlugin<void> = {
 
       // Create button
       const button = document.createElement('button');
-      button.textContent = 'Run Hello';
+      button.textContent = 'Run Hello 7';
       button.className = 'jp-Button';
       content.node.appendChild(button);
 
@@ -58,36 +58,37 @@ const plugin: JupyterFrontEndPlugin<void> = {
       // Add button click handler
       button.onclick = async () => {
         try {
-          // Start a new kernel
-          const kernel = await manager.kernels.startNew({
-            name: 'python'  // This will use the Pyodide kernel in JupyterLite
-          });
+          // Espera o Pyodide estar disponível
+          let pyodide = null;
+          let attempts = 0;
+          const maxAttempts = 10;
 
-          // Execute the code to import and run the hello function
-          const code = `
-import micropip
-await micropip.install('./src/script.py')
-from script import hello
-hello()
-`;
-          const future = kernel.requestExecute({ code });
-          
-          // Handle output messages
-          future.onIOPub = (msg: KernelMessage.IIOPubMessage) => {
-            if (msg.header.msg_type === 'stream') {
-              const content = msg.content as KernelMessage.IStreamMsg['content'];
-              model.add({
-                output_type: 'stream',
-                name: content.name,
-                text: content.text
-              });
+          while (!pyodide && attempts < maxAttempts) {
+            pyodide = (window as any).pyodide || (window as any).jupyterlitePyodide;
+            if (!pyodide) {
+              attempts++;
+              await new Promise(resolve => setTimeout(resolve, 1000)); // Espera 1 segundo
             }
-          };
+          }
 
-          await future.done;
+          if (!pyodide) {
+            throw new Error('Pyodide não está disponível após várias tentativas. Por favor, recarregue a página e tente novamente.');
+          }
 
-          // Shutdown the kernel
-          await kernel.shutdown();
+          // Executa o código Python
+          const code = `
+import sys
+print(f"Python version: {sys.version}")
+print(f"Python executable: {sys.executable}")
+print(f"Python path: {sys.path}")
+`;
+          
+          const output = await pyodide.runPythonAsync(code);
+          model.add({
+            output_type: 'stream',
+            name: 'stdout',
+            text: output ? output.toString() : ''
+          });
         } catch (error: any) {
           console.error('Failed to execute code:', error);
           model.add({
