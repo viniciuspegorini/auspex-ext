@@ -18,17 +18,17 @@ SHELL ["/bin/bash", "--login", "-c"]
 
 WORKDIR /app
 
-COPY auspex-extension .
-
-RUN pip install -ve .
-
-RUN jupyter labextension develop --overwrite .
-
 COPY notebooks ./notebooks
 
 COPY requirements.txt .
 
 RUN pip install -r requirements.txt
+
+COPY kernel-messaging .
+
+RUN pip install -ve .
+
+RUN jupyter labextension develop --overwrite .
 
 RUN jupyter lite build --contents ./notebooks
 
