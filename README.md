@@ -2,6 +2,9 @@
 
 This repository contains a Docker setup for running JupyterLite, a lightweight version of Jupyter that runs entirely in the browser.
 
+## Download do conda
+https://conda-forge.org/download/
+
 ## Requirements
 
 - Docker
@@ -12,12 +15,22 @@ This repository contains a Docker setup for running JupyterLite, a lightweight v
 1. Clone this repository
 2. Build and start the container:
    ```bash
-   docker-compose up -d
+   docker-compose up -d --build
    ```
 3. Open your browser and navigate to:
    ```
    http://localhost:8000
    ```
+
+4. When new resources are added to the extension, run:
+
+```bash
+jlpm install && jlpm build
+````
+
+```bash
+docker-compose up -d --build
+```
 
 ## Structure
 
@@ -25,6 +38,7 @@ This repository contains a Docker setup for running JupyterLite, a lightweight v
 - `requirements.txt` - Python dependencies
 - `Dockerfile` - Container configuration
 - `docker-compose.yml` - Docker Compose configuration
+- `auspex-extension/` - Directory containing the extension
 
 ## Adding New Notebooks
 
@@ -87,3 +101,5 @@ Para atualizar o build da extensão
 ```bash
 jlpm run build
 ```
+
+Considerando a pasta auspex-extensiom que é uma extensão Jupiterlite. A função hello dentro do arquivo pyton do arquivo index não está sendo executada

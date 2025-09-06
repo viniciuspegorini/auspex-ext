@@ -1,0 +1,208 @@
+/*
+    See the JupyterLab Developer Guide for useful CSS Patterns:
+
+    https://jupyterlab.readthedocs.io/en/stable/developer/css.html
+*/
+
+.jp-example-view {
+  background-color: aliceblue;
+  overflow: auto;
+}
+
+.jp-example-button {
+  background-color: #1E90FF;
+  border-radius: 12px;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  margin: 2vh;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.jp-example-button:hover{
+  background-color: #87CEFA;
+}
+
+.jp-example-button.disabled-button,
+.jp-example-button:disabled {
+  background-color: rgb(133, 150, 175);
+  cursor: not-allowed;
+}
+
+.button-copy{
+  background-color: #ffffffc7;
+  border-radius: 12px;
+  border: none;
+  color: #1E90FF;
+  padding: 15px 32px;
+  margin: 2vh;
+  text-align: center;
+  text-decoration: none;
+  display: inline-flex;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.kernel-container{
+  padding: 1vh;
+  margin: 1vh;
+  background-color: #D3D3D3;
+  overflow: scroll;
+}
+
+.head{
+  display: flex;
+}
+
+.div-copy{
+  display: flex;
+  justify-content: right;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.container{
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+ }
+
+.card{
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0 0 1vh 0;
+}
+
+.card-files, .card-data, .card-result {
+  background: #fff;
+  border-radius: 6px;
+  padding: 0 0 1vh 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  border: 1px solid #ccc;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.files-list {
+  overflow-y: auto;
+  padding: 1vh;
+  margin: 1vh;
+  background: #fff;
+  border-radius: 6px;
+  padding: 0 0 1vh 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  border: 1px solid #ccc;
+}
+
+.files-list div {
+  padding: 6px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.files-list div:hover {
+  background: #f0f0f0;
+}
+
+.envelope-container {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+}
+
+.div-env{
+  display: flex;
+  align-items: center;
+  padding: 0 0 0 5vh;
+}
+
+.div-env input[type="checkbox"] {
+  margin-right: 10px; 
+}
+
+.grid-layout, .parameters {
+  display: flex;
+  grid-template-columns: 1fr 1fr; 
+  gap: 20px;
+}
+
+.parameters{
+  padding: 1vh;
+}
+
+.sidebar{
+  flex: 1;
+}
+
+.main-panel{
+  flex: 2;
+}
+
+.roi-parameters{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; 
+  gap: 2vh;
+  padding-right: 3vh;
+}
+
+.roi-section, .parameters-grid{
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 1vh;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  border: 1px solid #ccc;
+}
+
+.parameters-grid{
+  align-items: center;
+  padding: 3vh;
+}
+
+.data-table {
+  gap: 4px 12px;                 
+  margin-top: 10px;
+  font-size: 14px;
+  padding: 1vh;
+}
+
+body{
+  overflow: auto;
+}
+
+h3 {
+  margin-top: 0;
+  font-size: 16px;
+  padding: 1vh;
+  border-bottom: 1px solid #eee;
+  color: #333;
+  background-color: #B0C4DE;
+
+}
+
+h2{
+  padding: 1vh;
+}
+
+input, select {
+  width: 100%;
+  padding: 6px;
+  margin: 4px 0 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+td{
+  padding: 8px;
+}
+

@@ -5,9 +5,10 @@ import {
 
 import { ICommandPalette, MainAreaWidget } from '@jupyterlab/apputils';
 import { ILauncher } from '@jupyterlab/launcher';
-
 import { Widget } from '@lumino/widgets';
-
+import { OutputArea, OutputAreaModel } from '@jupyterlab/outputarea';
+import { RenderMimeRegistry } from '@jupyterlab/rendermime';
+import { ServiceManager } from '@jupyterlab/services';
 
 /**
  * Initialization data for the auspex-extension extension.
@@ -23,18 +24,81 @@ const plugin: JupyterFrontEndPlugin<void> = {
     palette: ICommandPalette,
     launcher: ILauncher | null
   ) => {
-    console.log('AUSPEX extension is activated! - 1');
+    console.log('AUSPEX extension is activated! - 4');
 
-    
+    // Create a service manager
+    const manager = new ServiceManager();
+    await manager.ready;
+
     // Define a widget creator function,
     // then call it to make a new widget
     const newWidget = () => {
-      // Create a blank content widget inside of a MainAreaWidget
+      // Create the main widget container
       const content = new Widget();
       const widget = new MainAreaWidget({ content });
       widget.id = 'ext-auxpex';
       widget.title.label = 'AUSPEX Extension';
       widget.title.closable = true;
+
+      // Create button
+      const button = document.createElement('button');
+      button.textContent = 'Run Hello 7';
+      button.className = 'jp-Button';
+      content.node.appendChild(button);
+
+      // Create output area
+      const model = new OutputAreaModel();
+      const rendermime = new RenderMimeRegistry();
+      const outputArea = new OutputArea({
+        model: model,
+        rendermime: rendermime
+      });
+      content.node.appendChild(outputArea.node);
+
+      // Add button click handler
+      button.onclick = async () => {
+        try {
+          // Espera o Pyodide estar disponível
+          let pyodide = null;
+          let attempts = 0;
+          const maxAttempts = 10;
+
+          while (!pyodide && attempts < maxAttempts) {
+            pyodide = (window as any).pyodide || (window as any).jupyterlitePyodide;
+            if (!pyodide) {
+              attempts++;
+              await new Promise(resolve => setTimeout(resolve, 1000)); // Espera 1 segundo
+            }
+          }
+
+          if (!pyodide) {
+            throw new Error('Pyodide não está disponível após várias tentativas. Por favor, recarregue a página e tente novamente.');
+          }
+
+          // Executa o código Python
+          const code = `
+import sys
+print(f"Python version: {sys.version}")
+print(f"Python executable: {sys.executable}")
+print(f"Python path: {sys.path}")
+`;
+          
+          const output = await pyodide.runPythonAsync(code);
+          model.add({
+            output_type: 'stream',
+            name: 'stdout',
+            text: output ? output.toString() : ''
+          });
+        } catch (error: any) {
+          console.error('Failed to execute code:', error);
+          model.add({
+            output_type: 'stream',
+            name: 'stderr',
+            text: 'Error executing code: ' + error.message
+          });
+        }
+      };
+
       return widget;
     }
     let widget = newWidget();
