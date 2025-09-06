@@ -55,9 +55,12 @@ export class KernelView extends ReactWidget {
             this.update();
             if (!this._scriptLoaded) {
               await this.loadPythonScript('http://localhost:8000/files/test.py');  
+              await this.loadPythonScript('http://localhost:8000/files/src/auspex.py');  
               this._scriptLoaded = true;
               console.log("script loaded");
             }
+            await runPythonFunction(this._model, `load_data("SDH40mmPA_FMC_Contact.civa")`);
+            console.log("OK DATA");
             await runPythonFunction(this._model, `run_saft(${this._xRoi}, ${this._yRoi}, ${this._zRoi})`);
             
             this._loading = false;
@@ -97,7 +100,10 @@ export class KernelView extends ReactWidget {
               this._zRoi = Number(e.target.value);
             }}
           />
-        </label>
+        </label>        
+        <br/>
+        <input id='shot' />
+        <input id='angles' />
         <UseSignal signal={this._model.stateChanged}>
           {(): JSX.Element => (
             <>
@@ -109,6 +115,7 @@ export class KernelView extends ReactWidget {
               <>                
                 <br />
                 <img src={`data:image/png;base64,${this.getValue(this._model)}`}/>
+                <table id="b-data-insp-parameters"></table>
               </>
               ) : (
                 <>
