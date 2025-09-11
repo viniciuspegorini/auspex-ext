@@ -13,6 +13,18 @@ async function runPythonFunction(model: KernelModel, functionCall: string) {
   await model.execute(functionCall);
 }
 
+type ParamType = "list" | "str" | "float";
+
+interface Parameter {
+  title?: string;
+  name: string;
+  type: ParamType;
+  value: string | number;
+  readonly: string;
+  values?: Record<string, string>; // só quando type = "list"
+  decimals?: number;              // só quando type = "float"
+}
+
 export class KernelView extends ReactWidget {
   private _loading = false;
   private _scriptLoaded = false;
@@ -100,16 +112,100 @@ export class KernelView extends ReactWidget {
         text = raw as string;
       }
 
-      let result: any;
+      let tab_insp: Parameter[];
+      let tab_probe: Parameter[];
       try {
-        result = JSON.parse(text.replace(/'/g, '"'));
-      } catch {
-        result = text; // fallback: devolve como string pura
+        // substitui aspas simples por duplas e tenta converter para JSON
+        const parsed = JSON.parse(text.replace(/'/g, '"'));      
+        console.log(parsed)
+        tab_insp = parsed.insp_pars as Parameter[]
+        tab_probe = parsed.probe_pars as Parameter[]
+        console.log("result:")
+        console.log(tab_insp)
+        console.log("result**************")
+      } catch( error ) {
+        console.log("Erro")
+        console.log(error)
+        if (error instanceof Error) {
+          console.error("Erro:", error.message);   // só a mensagem
+          console.error("Stack:", error.stack);    // rastreio da stack
+        } else {
+          console.error("Erro desconhecido:", error);
+        }
+        tab_insp = [];
+        tab_probe = [];       
       }
-      console.log(result)
+      console.log("Gerar tabela")
+      this.mountTable('tab_insp', tab_insp)
+      this.mountTable('tab_probe', tab_probe)
+      
     }
 
     return value;
+  }
+
+  private mountTable(tableName: string, parameters: Parameter[]): void {
+    const table = document.getElementById(tableName) as HTMLTableElement | null;
+    
+    if (!table) return;
+    table.innerHTML = "";
+
+    for (const child of parameters) {
+      const row = table.insertRow();
+
+      // Coluna 1: título
+      const cell1 = row.insertCell(0);
+      cell1.innerHTML = child.title || child.name;
+      // Coluna 2: valor ou input
+      const cell2 = row.insertCell(1);
+
+      if (child.readonly === 'false') {
+        let inputElement: HTMLElement;
+
+        if (child.type === 'list') {
+          console.log("select")
+          // SELECT
+          const select = document.createElement("select");
+          select.id = child.name;
+
+          for (const key in child.values) {
+            const option = document.createElement("option");
+            option.value = child.values[key];
+            option.text = key;
+            if (child.values[key] === child.value) {
+              option.selected = true;
+            }
+            select.appendChild(option);
+          }
+          inputElement = select;
+
+        } else if (child.type === "float") {
+          // NUMBER
+          const input = document.createElement("input");
+          input.type = "number";
+          input.id = child.name;
+          input.value = String(child.value ?? "");
+          input.step =
+            child.decimals !== undefined
+              ? (1 / Math.pow(10, child.decimals)).toFixed(child.decimals)
+              : "any";
+          inputElement = input;
+
+        } else {
+          // STRING
+          const input = document.createElement("input");
+          input.type = "text";
+          input.id = child.name;
+          input.value = String(child.value ?? "");
+          inputElement = input;
+        }
+
+        cell2.appendChild(inputElement);        
+      } else {
+        // READONLY
+        cell2.innerHTML = String(child.value ?? "");
+      }
+    }
   }
 
   protected render(): React.ReactElement<any> {
@@ -180,7 +276,7 @@ export class KernelView extends ReactWidget {
                           this.update();
                         }}
                       >
-                        Run Load Data
+                        Run Load Datasss
                     </button>
 
                     <div className="files-list">
@@ -196,9 +292,11 @@ export class KernelView extends ReactWidget {
                     <div className='h3'>
                       <h3>Data</h3>
                     </div>
+                    
                     <button
                       disabled={this._loading}
                       className={`jp-example-button ${this._loading ? 'disabled-button' : ''}`}
+                      style={{display:'none'}}
                       onClick={async (): Promise<void> => {
                         this._loading = true;
                         this.update();
@@ -215,107 +313,34 @@ export class KernelView extends ReactWidget {
                     >
                       Reload Data
                     </button>
-
-                    {this._dataReloaded && this._data && (
-                      <div className="data-table">
-                        <h4>Inspection Parameters</h4>
-                        <table>
-                          <tr>
-                            <td>Inspection Type</td>
-                            <td>
-                              <select name="inspection-type" id="inspection-type">
-                                <option value="type">
-                                  {this._data.inspectionType}
-                                </option>
-                              </select>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Excitation</td>
-                            <td>{this._data.excitation}</td>
-                          </tr>
-                          <tr>
-                            <td>Origin [mm]</td>
-                            <td>{this._data.origin}</td>
-                          </tr>
-                          <tr>
-                            <td>Water Path [mm]</td>
-                            <td>{this._data.waterPath}</td>
-                          </tr>
-                          <tr>
-                            <td>Couplant L-Speed [m/s]</td>
-                            <td>{this._data.cSpeed}</td>
-                          </tr>
-                          <tr>
-                            <td>Sample Frequency [MHz]</td>
-                            <td>{this._data.sampleFreq}</td>
-                          </tr>
-                          <tr>
-                            <td>Gate start [µs]</td>
-                            <td>{this._data.gateStart}</td>
-                          </tr>
-                          <tr>
-                            <td>Nb. Samples</td>
-                            <td>{this._data.nbSamples}</td>
-                          </tr>
-                          <tr>
-                            <td>Hardware Gain [dB]</td>
-                            <td>{this._data.hardwareGain}</td>
-                          </tr>
-                          <tr>
-                            <td>Digital Gain [dB]</td>
-                            <td>{this._data.digitalGain}</td>
-                          </tr>
+                     
+                      <br />
+                      
+                      <div className="table-wrapper table-scroll">
+                        <div className="table-title">Inspection Parameters</div>
+                        <table className="jupyter" id='tab_insp'>
+                          <thead>
+                            <tr>
+                              <th>Parâmetro</th>
+                              <th>Valor</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
                         </table>
-
-                        <br />
-                        <h4>Probe Parameters</h4>
-                        <table>
-                          <tr>
-                            <td>Probe Type</td>
-                            <td>{this._data.probeType}</td>
-                          </tr>
-                          <tr>
-                            <td>Element Dimension [mm]</td>
-                            <td>{this._data.elementDimen}</td>
-                          </tr>
-                          <tr>
-                            <td>Central Frequency [MHz]</td>
-                            <td>{this._data.centralFreq}</td>
-                          </tr>
-                          <tr>
-                            <td>Pulse Bandwidth [-6dB]</td>
-                            <td>{this._data.pulseBandwidth}</td>
-                          </tr>
-                          <tr>
-                            <td>Nb. Elements</td>
-                            <td>{this._data.nbElements}</td>
-                          </tr>
-                          <tr>
-                            <td>Pitch [mm]</td>
-                            <td>{this._data.pitch}</td>
-                          </tr>
-                        </table>
-
-                        <br />
-                        <h4>Specimen Parameters</h4>
-                        <table>
-                          <tr>
-                            <td>L-Speed in material [m/s]</td>
-                            <td>{this._data.lSpeed}</td>
-                          </tr>
-                          <tr>
-                            <td>T-Speed in material [m/s]</td>
-                            <td>{this._data.tSpeed}</td>
-                          </tr>
-                          <tr>
-                            <td>Surface Roughness [mm]</td>
-                            <td>{this._data.surfaceRoughness}</td>
-                          </tr>
-                        </table>
-
                       </div>
-                    )}
+                      <br />                      
+                      <div className="table-wrapper table-scroll">
+                        <div className="table-title">Probe Parameters</div>
+                        <table className="jupyter" id='tab_probe'>
+                          <thead>
+                              <tr>
+                                <th>Parâmetro</th>
+                                <th>Valor</th>
+                              </tr>
+                          </thead>
+                          <tbody></tbody>                        
+                        </table>
+                      </div>                                        
                   </div>
                 </div>
 

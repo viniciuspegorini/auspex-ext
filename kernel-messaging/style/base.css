@@ -206,3 +206,130 @@ td{
   padding: 8px;
 }
 
+.table-wrapper table.jupyter {
+  width: 97%;
+  margin: 0 auto; /* centraliza a tabela dentro do wrapper */
+}
+
+/* Reset visual básico */
+table.jupyter { 
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+               Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  font-size: 11px;
+  color: #222;
+  background: #fff;
+}
+
+/* Cabeçalho */
+table.jupyter thead th {
+  background: #f6f8fa;      /* tom sutil de cinza como no Jupyter */
+  color: #333;
+  font-weight: 600;
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+  vertical-align: middle;
+}
+
+/* Linhas e células */
+table.jupyter tbody td {
+  padding: 8px 12px;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  word-break: break-word;
+}
+
+/* Zebra striping suave */
+table.jupyter tbody tr:nth-child(odd) {
+  background: #ffffff;
+}
+table.jupyter tbody tr:nth-child(even) {
+  background: #fbfbfc;
+}
+
+/* Hover discreto na linha */
+table.jupyter tbody tr:hover {
+  background: #f2f6fb;
+}
+
+/* Células com texto monoespaçado (ex.: código/valores) */
+table.jupyter td.code, table.jupyter th.code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+  font-size: 10px;
+  color: #0b3d91;
+}
+
+/* Tamanho mínimo das células (evita colapsar) */
+table.jupyter td, table.jupyter th {
+  min-width: 48px;
+}
+
+/* Bordas arredondadas no contêiner (opcional) */
+/* Wrapper da tabela */
+.table-wrapper {
+  width: 90%;              /* ocupa 90% do card */
+  max-width: 1200px;       /* limite em telas muito grandes */
+  margin: 0 auto;          /* centraliza dentro do card */
+  border: 0px solid rgba(0,0,0,0.08);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 0px 0px rgba(16,24,40,0.03);
+  margin-top: 1rem;
+}
+
+
+/* Responsividade simples: permitir scroll horizontal */
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* Pequeno estilo para inputs dentro da tabela (caso use inputs dinamicamente) */
+/* Ajusta inputs dentro da tabela */
+/* Inputs minimalistas */
+table.jupyter input[type="text"],
+table.jupyter input[type="number"],
+table.jupyter select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 2px 4px;
+  border: none;               /* sem borda grossa */
+  border-bottom: 1px solid #ccc; /* só linha inferior */
+  border-radius: 0;
+  background: transparent;
+  font-size: 13px;
+  line-height: 1.4;
+  height: 22px;
+  margin: 0;
+  outline: none;              /* tira highlight padrão */
+  transition: border-color 0.2s ease;
+}
+
+table.jupyter input:focus,
+table.jupyter select:focus {
+  border-bottom: 1px solid #0b3d91; /* realce minimalista */
+}
+
+/* Estilo para cabeçalho fixo opcional (use com JS para fixar o thead) */
+table.jupyter thead th.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #f6f8fa;
+}
+
+/* Título da tabela */
+.table-title {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 12px;
+  background: #f6f8fa;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+               Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  color: #333;
+  width: 90%;
+  margin: 0 auto; /* centraliza a tabela dentro do wrapper */
+}
