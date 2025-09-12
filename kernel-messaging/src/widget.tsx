@@ -7,7 +7,6 @@ import { KernelModel } from './model';
 import { IMimeBundle } from '@jupyterlab/nbformat';
 
 import { ScrollContainer } from "./scroll-container"; // caminho relativo
-import { Message } from '@lumino/messaging';
 
 
 async function runPythonFunction(model: KernelModel, functionCall: string) {
@@ -26,17 +25,11 @@ interface Parameter {
   values?: Record<string, string>; // só quando type = "list"
   decimals?: number;              // só quando type = "float"
 }
-interface KernelViewState {
-  files: string[];
-  filtered: string[];
-  selected: string;
-  loading: boolean;
-}
 export class KernelView extends ReactWidget {
   private _loading = false;
   private _scriptLoaded = false;
   private _dataReloaded = false;
-  private _fileReloaded = false;
+  // private _fileReloaded = false;
   private _xRoi = 0;
   private _yRoi = 0;
   private _zRoi = 0;
@@ -69,39 +62,12 @@ export class KernelView extends ReactWidget {
               tSpeed: 3250,
               surfaceRoughness: 0
             };
-  private state: KernelViewState;
   
   constructor(model: KernelModel) {
     super();
     this._model = model;  
-    this.state = {
-      files: [],
-      filtered: [],
-      selected: '',
-      loading: true,
-    };      
-  }
-
-  async onAfterAttach(msg: Message): Promise<void> {
-    super.onAfterAttach(msg);
-
-    // 🔹 Exemplo: simula retorno de arquivos
-    const rawFiles = [
-      'Untitled.ipynb'
-    ];
-
-    const filtered = rawFiles.filter(
-      f => f.endsWith('.civa') || f.endsWith('.m2k')
-    );
-
-    this.updateState({ files: rawFiles, filtered, loading: false });
   }
   
-  private updateState(newState: Partial<KernelViewState>) {
-    this.state = { ...this.state, ...newState };
-    this.update(); // 🔹 força re-render
-  }
-
   private async loadPythonScript(scriptUrl: string) {
     const res = await fetch(scriptUrl);
     const script = await res.text();
@@ -132,7 +98,7 @@ export class KernelView extends ReactWidget {
           let tab_probe: Parameter[];
           try {
             // substitui aspas simples por duplas e tenta converter para JSON
-            const parsed = JSON.parse(text.replace(/'/g, '"'));                
+            const parsed = JSON.parse(text.replace(/'/g, '"'));
             tab_insp = parsed.insp_pars as Parameter[]
             tab_probe = parsed.probe_pars as Parameter[]                    
           } catch( error ) {
@@ -148,11 +114,21 @@ export class KernelView extends ReactWidget {
           this.mountTable('tab_insp', tab_insp)
           this.mountTable('tab_probe', tab_probe)
         } else {
-          let files: string[] = [];
+          
+          const files = JSON.parse(text.replace(/'/g, '"'));          
+          
           const filtered = files.filter(
-            f => f.endsWith(".civa") || f.endsWith(".m2k")
-          );          
-          this.updateState({ files: files, filtered, loading: false });
+            (f: string) => f.endsWith(".civa") || f.endsWith(".m2k")
+          );
+          const select = document.getElementById("insp-file") as HTMLElement;
+          console.log(select)
+          filtered.forEach((f: string) => {
+            console.log("select" + f);
+            const option = document.createElement("option");
+            option.value = f;
+            option.text = f;            
+            select.appendChild(option);
+          })
         }
       } else {
         console.log("Formato não reconhecido", data);
@@ -224,8 +200,7 @@ export class KernelView extends ReactWidget {
     }
   }
 
-  protected render(): React.ReactElement<any> {
-    const { filtered, selected, loading } = this.state;
+  protected render(): React.ReactElement<any> {    
     return (
       <div style={{ height: "100vh" }}>
         <ScrollContainer topOffset={50}>
@@ -263,14 +238,14 @@ export class KernelView extends ReactWidget {
                       onClick={async (): Promise<void> => {
                         this._loading = true;
                         this.update();
-                        if (!this._fileReloaded) {
-                          this._fileReloaded = true;
-                          console.log('file reloaded');
+                        if (!this._scriptLoaded) {
+                          await this.loadPythonScript('http://localhost:8000/files/test.py');
+                          this._scriptLoaded = true;
                         }
                         
                         await runPythonFunction(
                           this._model,
-                          `import os; os.listdir('.')`
+                          `list_data()`
                         );                        
 
                         this._loading = false;                        
@@ -306,25 +281,14 @@ export class KernelView extends ReactWidget {
                       Arquivo 1
                           
                     </div>
-                     <div className="file-select-wrapper">
-        <label htmlFor="file-select">Selecione um arquivo:</label>
-
-        {loading ? (
-          <p>Carregando arquivos...</p>
-        ) : (
-          <select
-            id="file-select"
-            value={selected}            
-          >
-            <option value="">-- escolha --</option>
-            {filtered.map(file => (
-              <option key={file} value={file}>
-                {file}
-              </option>
-            ))}
-          </select>
-        )}
-      </div>
+                    <div className="file-select-wrapper">
+                      <label htmlFor="insp-file">Selecione um arquivo:</label>
+                      <select
+                        id="insp-file"
+                      >
+                        <option value="">-- select --</option>                        
+                      </select>
+                    </div>
                   </div>
 
                   <br />

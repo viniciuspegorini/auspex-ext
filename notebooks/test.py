@@ -26,7 +26,7 @@ def sum():
     1 + 1
 
 def list_data():    
-    return json.dumps(os.listdir("."))
+    return os.listdir(".")
 
 def load_data():
     data = file_civa.read("SDH40mmPA_FMC_Contact.civa")
