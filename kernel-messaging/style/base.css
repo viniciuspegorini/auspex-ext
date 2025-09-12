@@ -207,7 +207,7 @@ td{
 }
 
 .table-wrapper table.jupyter {
-  width: 97%;
+  width: 90%;
   margin: 0 auto; /* centraliza a tabela dentro do wrapper */
 }
 
@@ -289,27 +289,43 @@ table.jupyter td, table.jupyter th {
 /* Pequeno estilo para inputs dentro da tabela (caso use inputs dinamicamente) */
 /* Ajusta inputs dentro da tabela */
 /* Inputs minimalistas */
-table.jupyter input[type="text"],
-table.jupyter input[type="number"],
-table.jupyter select {
+.table-wrapper input {
   width: 100%;
-  box-sizing: border-box;
-  padding: 2px 4px;
-  border: none;               /* sem borda grossa */
-  border-bottom: 1px solid #ccc; /* só linha inferior */
-  border-radius: 0;
-  background: transparent;
-  font-size: 13px;
-  line-height: 1.4;
-  height: 22px;
-  margin: 0;
-  outline: none;              /* tira highlight padrão */
-  transition: border-color 0.2s ease;
+  padding: 6px 8px;
+  border: 1px solid #ccc;       /* borda leve em todas as direções */
+  border-radius: 4px;           /* cantos arredondados suaves */
+  background: #fff;
+  font-size: 10px;
+  color: #333;
+  height: 10px;
+
+  /* remove estilos "poluídos" do navegador */
+  outline: none;
+  box-shadow: none;
+  appearance: none;
 }
 
-table.jupyter input:focus,
-table.jupyter select:focus {
-  border-bottom: 1px solid #0b3d91; /* realce minimalista */
+.table-wrapper select {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #ccc;       /* borda leve em todas as direções */
+  border-radius: 4px;           /* cantos arredondados suaves */
+  background: #fff;
+  font-size: 10px;
+  color: #333;
+  height: 24px;
+
+  /* remove estilos "poluídos" do navegador */
+  outline: none;
+  box-shadow: none;
+  appearance: none;
+}
+
+/* destaque no foco */
+.table-wrapper input:focus,
+.table-wrapper select:focus {
+  border-color: #007bff;       /* azul discreto */
+  box-shadow: 0 0 0 2px rgba(0,123,255,0.15);
 }
 
 /* Estilo para cabeçalho fixo opcional (use com JS para fixar o thead) */
@@ -332,4 +348,37 @@ table.jupyter thead th.sticky {
   color: #333;
   width: 90%;
   margin: 0 auto; /* centraliza a tabela dentro do wrapper */
+}
+
+
+.file-select-wrapper {
+  margin: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.file-select-label {
+  font-size: 0.85rem;
+  margin-bottom: 0.3rem;
+  color: #555;
+}
+
+.file-select {
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  font-size: 0.9rem;
+  color: #333;
+
+  outline: none;
+  box-shadow: none;
+  appearance: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* estado de foco */
+.file-select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.15);
 }

@@ -6,7 +6,7 @@ await piplite.install(['mini-auspex', 'scipy'])
 from framework import file_civa, post_proc, file_m2k
 from framework.data_types import ImagingROI
 from imaging import saft
-
+import os, json
 # import json
 # from js import JSON
 
@@ -24,6 +24,9 @@ def run_saft(x_roi, y_roi, z_roi):
 
 def sum():
     1 + 1
+
+def list_data():    
+    return json.dumps(os.listdir("."))
 
 def load_data():
     data = file_civa.read("SDH40mmPA_FMC_Contact.civa")

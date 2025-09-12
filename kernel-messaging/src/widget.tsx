@@ -7,6 +7,8 @@ import { KernelModel } from './model';
 import { IMimeBundle } from '@jupyterlab/nbformat';
 
 import { ScrollContainer } from "./scroll-container"; // caminho relativo
+import { Message } from '@lumino/messaging';
+
 
 async function runPythonFunction(model: KernelModel, functionCall: string) {
   // Call the function from python file
@@ -24,7 +26,12 @@ interface Parameter {
   values?: Record<string, string>; // só quando type = "list"
   decimals?: number;              // só quando type = "float"
 }
-
+interface KernelViewState {
+  files: string[];
+  filtered: string[];
+  selected: string;
+  loading: boolean;
+}
 export class KernelView extends ReactWidget {
   private _loading = false;
   private _scriptLoaded = false;
@@ -62,10 +69,37 @@ export class KernelView extends ReactWidget {
               tSpeed: 3250,
               surfaceRoughness: 0
             };
-
+  private state: KernelViewState;
+  
   constructor(model: KernelModel) {
     super();
-    this._model = model;
+    this._model = model;  
+    this.state = {
+      files: [],
+      filtered: [],
+      selected: '',
+      loading: true,
+    };      
+  }
+
+  async onAfterAttach(msg: Message): Promise<void> {
+    super.onAfterAttach(msg);
+
+    // 🔹 Exemplo: simula retorno de arquivos
+    const rawFiles = [
+      'Untitled.ipynb'
+    ];
+
+    const filtered = rawFiles.filter(
+      f => f.endsWith('.civa') || f.endsWith('.m2k')
+    );
+
+    this.updateState({ files: rawFiles, filtered, loading: false });
+  }
+  
+  private updateState(newState: Partial<KernelViewState>) {
+    this.state = { ...this.state, ...newState };
+    this.update(); // 🔹 força re-render
   }
 
   private async loadPythonScript(scriptUrl: string) {
@@ -77,71 +111,54 @@ export class KernelView extends ReactWidget {
     console.log('python script loaded');
   }
 
-  private getValue(model: KernelModel): any {
-    //let test;    
-    // if (model.output) {
-    //   test = (model.output.data as IMimeBundle)['image/png'];
-    // }
-
-    let value: any = null;
-    const outputData = model.output;
-    console.log("Model Out 0: ")
-    console.log(model.output)
-    console.log("Model Out Data :0 ")
-    console.log(model.output?.data)
-    if (outputData && 'text/plain' in outputData) {
-      console.log("Model Out 1: ")
-      console.log(model.output)
-      console.log("Model Out Data: ")
-      console.log(model.output?.data)
-      value = (outputData as IMimeBundle)['text/plain'];
-    } else if (outputData) {
-      console.log("Model Out 2: ")
-      console.log(model.output)
-      console.log("Model Out Data: ")
-      console.log(model.output?.data)
-      // value = (outputData.data as IMimeBundle)['image/png'];
-      // value = (outputData as IMimeBundle)['text/plain'];
-      let raw = (model.output.data as IMimeBundle)['text/plain'];
-
-      // normaliza para string
-      let text: string;
-      if (Array.isArray(raw)) {
-        text = raw.join("\n");
-      } else {
-        text = raw as string;
-      }
-
-      let tab_insp: Parameter[];
-      let tab_probe: Parameter[];
-      try {
-        // substitui aspas simples por duplas e tenta converter para JSON
-        const parsed = JSON.parse(text.replace(/'/g, '"'));      
-        console.log(parsed)
-        tab_insp = parsed.insp_pars as Parameter[]
-        tab_probe = parsed.probe_pars as Parameter[]
-        console.log("result:")
-        console.log(tab_insp)
-        console.log("result**************")
-      } catch( error ) {
-        console.log("Erro")
-        console.log(error)
-        if (error instanceof Error) {
-          console.error("Erro:", error.message);   // só a mensagem
-          console.error("Stack:", error.stack);    // rastreio da stack
+  private getValue(model: KernelModel): any {    
+    let result;
+    if (model.output?.data) {      
+      const data = model.output.data as IMimeBundle;
+      if ('image/png' in data) {
+        result = (model.output.data as IMimeBundle)['image/png'];        
+      } else if ('text/plain' in data) {
+        let raw = (model.output.data as IMimeBundle)['text/plain'];        
+        // normaliza para string
+        let text: string;
+        if (Array.isArray(raw)) {
+          text = raw.join("\n");
         } else {
-          console.error("Erro desconhecido:", error);
+          text = raw as string;
         }
-        tab_insp = [];
-        tab_probe = [];       
-      }
-      console.log("Gerar tabela")
-      this.mountTable('tab_insp', tab_insp)
-      this.mountTable('tab_probe', tab_probe)
-      
-    }
 
-    return value;
+        if (text.includes("insp_pars")) {
+          let tab_insp: Parameter[];
+          let tab_probe: Parameter[];
+          try {
+            // substitui aspas simples por duplas e tenta converter para JSON
+            const parsed = JSON.parse(text.replace(/'/g, '"'));                
+            tab_insp = parsed.insp_pars as Parameter[]
+            tab_probe = parsed.probe_pars as Parameter[]                    
+          } catch( error ) {
+            if (error instanceof Error) {
+              console.error("Erro:", error.message);   // só a mensagem
+              console.error("Stack:", error.stack);    // rastreio da stack
+            } else {
+              console.error("Erro desconhecido:", error);
+            }
+            tab_insp = [];
+            tab_probe = [];          
+          }        
+          this.mountTable('tab_insp', tab_insp)
+          this.mountTable('tab_probe', tab_probe)
+        } else {
+          let files: string[] = [];
+          const filtered = files.filter(
+            f => f.endsWith(".civa") || f.endsWith(".m2k")
+          );          
+          this.updateState({ files: files, filtered, loading: false });
+        }
+      } else {
+        console.log("Formato não reconhecido", data);
+      }
+    }    
+    return result;
   }
 
   private mountTable(tableName: string, parameters: Parameter[]): void {
@@ -162,8 +179,7 @@ export class KernelView extends ReactWidget {
       if (child.readonly === 'false') {
         let inputElement: HTMLElement;
 
-        if (child.type === 'list') {
-          console.log("select")
+        if (child.type === 'list') {          
           // SELECT
           const select = document.createElement("select");
           select.id = child.name;
@@ -209,6 +225,7 @@ export class KernelView extends ReactWidget {
   }
 
   protected render(): React.ReactElement<any> {
+    const { filtered, selected, loading } = this.state;
     return (
       <div style={{ height: "100vh" }}>
         <ScrollContainer topOffset={50}>
@@ -250,8 +267,13 @@ export class KernelView extends ReactWidget {
                           this._fileReloaded = true;
                           console.log('file reloaded');
                         }
-                        this._loading = false;
-                        this._model.execute('3+5');
+                        
+                        await runPythonFunction(
+                          this._model,
+                          `import os; os.listdir('.')`
+                        );                        
+
+                        this._loading = false;                        
                         this.update();
                       }}
                     >
@@ -284,6 +306,25 @@ export class KernelView extends ReactWidget {
                       Arquivo 1
                           
                     </div>
+                     <div className="file-select-wrapper">
+        <label htmlFor="file-select">Selecione um arquivo:</label>
+
+        {loading ? (
+          <p>Carregando arquivos...</p>
+        ) : (
+          <select
+            id="file-select"
+            value={selected}            
+          >
+            <option value="">-- escolha --</option>
+            {filtered.map(file => (
+              <option key={file} value={file}>
+                {file}
+              </option>
+            ))}
+          </select>
+        )}
+      </div>
                   </div>
 
                   <br />
