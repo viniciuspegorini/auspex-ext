@@ -48,7 +48,7 @@ export class KernelModel {
     });
 
     if (this.future) {
-      await this.future.done; // Aguarda execução terminar
+      await this.future.done; // Wait until the execution of the code was done
     }
   }
 
@@ -62,6 +62,27 @@ export class KernelModel {
         console.log(this._output);
         this._stateChanged.emit();
         break;
+      case 'stream': {
+        // 🔹 Capture stdout/stderr (runtime print and errors)
+        const content = msg.content as { name: string; text: string };
+        if (content.name === "stderr") {
+          console.error("STDERR:", content.text);
+        } else {
+          console.log("STDOUT:", content.text);
+        }
+        break;
+      }
+      case 'error': {
+        // 🔹 Captures tracebacks of Python`s exceptions
+        const content = msg.content as {
+          ename: string;
+          evalue: string;
+          traceback: string[];
+        };
+        console.error("Python Error:", content.ename, content.evalue);
+        console.error("Traceback:\n", content.traceback.join("\n"));
+        break;
+      }
       default:
         break;
     }

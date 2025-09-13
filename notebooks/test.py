@@ -10,9 +10,9 @@ import os, json
 # import json
 # from js import JSON
 
-def run_saft(x_roi, y_roi, z_roi):     
+def run_saft(x_roi, y_roi, z_roi, selected_insp):     
     #p_roy = json.loads(JSON.parse(obj_roi))
-    data = file_civa.read("SDH40mmPA_FMC_Contact.civa")
+    data = file_civa.read(selected_insp.strip())
     corner_roi = np.array([x_roi, y_roi, z_roi])[np.newaxis, :]
     roi = ImagingROI(corner_roi, height=20.0, width=20.0, h_len=200, w_len=200)
     key = saft.saft_kernel(data, roi=roi, sel_shot=0, c=5900.0)
@@ -22,14 +22,20 @@ def run_saft(x_roi, y_roi, z_roi):
     plt.title('SAFT')
     plt.show()
 
-def sum():
-    1 + 1
-
 def list_data():    
     return os.listdir(".")
 
-def load_data():
-    data = file_civa.read("SDH40mmPA_FMC_Contact.civa")
+def load_data(selected_insp):
+
+    if selected_insp.endswith('.zip'):
+        a = 1
+
+    if (selected_insp.endswith('.civa')):
+        data = file_civa.read(selected_insp)
+    else:
+        data = file_m2k.read(selected_insp, type_insp='contact', water_path=0, freq_transd=5, bw_transd=0.5,
+                     tp_transd='gaussian', sel_shots=0)
+        
     readonly_params = 'false'
     insp_pars = [
         {'title': 'Inspection Type', 'name': 'inspection_params.type_insp', 'type': 'list',

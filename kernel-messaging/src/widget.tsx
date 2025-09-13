@@ -118,7 +118,7 @@ export class KernelView extends ReactWidget {
           const files = JSON.parse(text.replace(/'/g, '"'));          
           
           const filtered = files.filter(
-            (f: string) => f.endsWith(".civa") || f.endsWith(".m2k")
+            (f: string) => f.endsWith(".civa") || f.endsWith(".m2k") || f.endsWith(".civa.zip") || f.endsWith(".m2k.zip")
           );
           const select = document.getElementById("insp-file") as HTMLElement;
           console.log(select)
@@ -252,8 +252,16 @@ export class KernelView extends ReactWidget {
                         this.update();
                       }}
                     >
-                      Load zip file (civa or m2k)
+                      Load inspections
                     </button>
+                    <div className="file-select-wrapper">
+                      <label htmlFor="insp-file">Select an inspection:</label>
+                      <select
+                        id="insp-file"
+                      >
+                        <option value="">-- select --</option>                        
+                      </select>
+                    </div>
                     <button
                         disabled={this._loading}
                         className={`jp-example-button ${this._loading ? 'disabled-button' : ''}`}
@@ -263,32 +271,20 @@ export class KernelView extends ReactWidget {
                           if (!this._scriptLoaded) {
                             await this.loadPythonScript('http://localhost:8000/files/test.py');
                             this._scriptLoaded = true;
-                          }                          
+                          }
+                          const select = document.getElementById("insp-file") as HTMLSelectElement;                          
+                          const file = select.value as string;
                           await runPythonFunction(
                             this._model,
-                            `load_data()`
+                            `load_data("${file}")`
                           );
                           this._height; this._pix_height; this._width; this._pix_width; this._shot; this._c; this._scattering_angle;
                           this._loading = false;
                           this.update();
                         }}
                       >
-                        Run Load Datasss
-                    </button>
-
-                    <div className="files-list">
-                        
-                      Arquivo 1
-                          
-                    </div>
-                    <div className="file-select-wrapper">
-                      <label htmlFor="insp-file">Selecione um arquivo:</label>
-                      <select
-                        id="insp-file"
-                      >
-                        <option value="">-- select --</option>                        
-                      </select>
-                    </div>
+                        Load inspection data
+                    </button>                    
                   </div>
 
                   <br />
@@ -480,10 +476,12 @@ export class KernelView extends ReactWidget {
                           if (!this._scriptLoaded) {
                             await this.loadPythonScript('http://localhost:8000/files/test.py');
                             this._scriptLoaded = true;
-                          }
+                          }                          
+                          const select = document.getElementById("insp-file") as HTMLSelectElement;                          
+                          const file = select.value as string;                          
                           await runPythonFunction(
                             this._model,
-                            `run_saft(${this._xRoi}, ${this._yRoi}, ${this._zRoi})`
+                            `run_saft(${this._xRoi}, ${this._yRoi}, ${this._zRoi}, "${file}")`
                           );
                           this._height; this._pix_height; this._width; this._pix_width; this._shot; this._c; this._scattering_angle;
                           this._loading = false;
