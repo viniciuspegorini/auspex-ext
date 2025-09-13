@@ -122,6 +122,7 @@ export class KernelView extends ReactWidget {
           );
           const select = document.getElementById("insp-file") as HTMLElement;
           console.log(select)
+          select.innerHTML = "";
           filtered.forEach((f: string) => {
             console.log("select" + f);
             const option = document.createElement("option");
@@ -199,6 +200,37 @@ export class KernelView extends ReactWidget {
       }
     }
   }
+
+  private  handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const arrayBuffer = await file.arrayBuffer();
+    const uint8Array = new Uint8Array(arrayBuffer);
+
+    // Converte para Base64 em blocos para não estourar a pilha
+    const base64Data = this.uint8ToBase64(uint8Array);
+
+    const filename = file.name;
+    if (!this._scriptLoaded) {
+      await this.loadPythonScript('http://localhost:8000/files/test.py');
+      this._scriptLoaded = true;
+    }
+    await runPythonFunction(this._model, `save_bytes_as_file("${base64Data}", "${filename}")`);
+    
+  }
+
+  private uint8ToBase64(uint8Array: Uint8Array): string {
+    let binary = "";
+    const chunkSize = 0x8000; // 32 KB
+    for (let i = 0; i < uint8Array.length; i += chunkSize) {
+      const chunk = uint8Array.subarray(i, i + chunkSize);
+      binary += String.fromCharCode.apply(null, chunk as any);
+    }
+    return btoa(binary);
+  }
+
+
 
   protected render(): React.ReactElement<any> {    
     return (
@@ -285,6 +317,13 @@ export class KernelView extends ReactWidget {
                       >
                         Load inspection data
                     </button>                    
+                    <br />
+                    <div style={{ padding: "10px" }}>
+                      <label>
+                        Upload file:
+                        <input type="file" onChange={this.handleFileChange} />
+                      </label>
+                    </div>
                   </div>
 
                   <br />

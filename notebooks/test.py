@@ -1,14 +1,23 @@
 import numpy as np
 from matplotlib import pyplot as plt
-from zipfile import ZipFile
 import piplite
 await piplite.install(['mini-auspex', 'scipy'])
 from framework import file_civa, post_proc, file_m2k
 from framework.data_types import ImagingROI
 from imaging import saft
 import os, json
+import zipfile
+import io
+import shutil
 # import json
 # from js import JSON
+
+import base64
+def save_bytes_as_file(b64, filename):
+    data = base64.b64decode(b64)
+    with open(filename, "wb") as f:
+        f.write(data)
+    print("Arquivo salvo:", filename)
 
 def run_saft(x_roi, y_roi, z_roi, selected_insp):     
     #p_roy = json.loads(JSON.parse(obj_roi))
@@ -28,7 +37,7 @@ def list_data():
 def load_data(selected_insp):
 
     if selected_insp.endswith('.zip'):
-        a = 1
+        extract_zip_rename_root(selected_insp)
 
     if (selected_insp.endswith('.civa')):
         data = file_civa.read(selected_insp)
@@ -107,3 +116,55 @@ def get_probe_params(data, readonly_params):
         probe_pars.append({'title': 'Pitch [mm]', 'name': 'data.probe_params.pitch', 'type': 'float',
                             'value': data.probe_params.pitch, 'readonly': readonly_params})
     return probe_pars
+
+def extract_zip_rename_root(zip_path: str, delete_zip: bool = True):    
+    """
+    Extract a ZIP while keeping the internal structure,
+    but rename the root folder to target_folder
+    """
+    target_folder: str
+    final_folder: str
+
+    # 1. Remove the .zip extension
+    final_folder = zip_path[:-4] if zip_path.endswith(".zip") else zip_path
+    
+    # 2. Create a new version replacing the ending .civa or .m2k with -civa or -m2k
+    if final_folder.endswith(".civa"):
+        target_folder = final_folder.replace(".civa", "-civa")
+    elif final_folder.endswith(".m2k"):
+        target_folder = final_folder.replace(".m2k", "-m2k")
+    else:
+        target_folder = final_folder  # keep it unchanged if it's neither
+
+    os.makedirs(target_folder, exist_ok=True)
+
+    # Read ZIP into memory
+    with open(zip_path, "rb") as f:
+        zip_bytes = f.read()
+    zip_buffer = io.BytesIO(zip_bytes)
+
+    with zipfile.ZipFile(zip_buffer) as zf:
+        # Detect the root folder (assuming the ZIP has a single root)
+        root_folders = set(f.filename.split('/')[0] for f in zf.infolist() if f.filename.strip())
+        if len(root_folders) != 1:
+            raise ValueError("The ZIP contains multiple root folders. Cannot rename automatically.")
+
+        old_root = list(root_folders)[0]
+
+        for member in zf.infolist():
+            if member.filename.strip() == "":
+                continue  # Ignore empty entries
+            # Replace the root with target_folder
+            relative_path = member.filename[len(old_root):].lstrip('/')
+            final_path = os.path.join(target_folder, relative_path)
+            if member.is_dir():
+                os.makedirs(final_path, exist_ok=True)
+            else:
+                os.makedirs(os.path.dirname(final_path), exist_ok=True)
+                with zf.open(member) as source, open(final_path, "wb") as dest:
+                    shutil.copyfileobj(source, dest)
+    os.rename(target_folder, final_folder)
+    # Remove the original ZIP if requested
+    if delete_zip and os.path.exists(zip_path):
+        os.remove(zip_path)
+

@@ -11,6 +11,11 @@ export class KernelModel {
     this._sessionContext = session;
   }
 
+    // Getter para o kernel
+  get kernel(): Kernel.IKernelConnection | null {
+    return this._sessionContext.session?.kernel ?? null;
+  }
+  
   get future(): Kernel.IFuture<
     KernelMessage.IExecuteRequestMsg,
     KernelMessage.IExecuteReplyMsg
