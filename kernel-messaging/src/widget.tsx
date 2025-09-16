@@ -2,6 +2,7 @@ import { ReactWidget, UseSignal} from '@jupyterlab/apputils';
 //import { IFileBrowserFactory } from '@jupyterlab/filebrowser';
 
 import * as React from 'react';
+//import {useState} from 'react';
 
 import { KernelModel } from './model';
 import { IMimeBundle } from '@jupyterlab/nbformat';
@@ -72,6 +73,7 @@ export class KernelView extends ReactWidget {
   }
 
   protected render(): React.ReactElement<any> {
+
     return (
       <div className="kernel-container">
         <div className='head'>
@@ -90,6 +92,7 @@ export class KernelView extends ReactWidget {
               Copyright
             </button>
           </div>
+          
         </div>
         
         <div className='container'>

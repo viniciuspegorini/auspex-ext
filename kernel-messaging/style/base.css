@@ -4,23 +4,43 @@
     https://jupyterlab.readthedocs.io/en/stable/developer/css.html
 */
 
+:root {
+  --color-black: #000;
+  --color-yellow-utf: #F1C400;
+  --color-yellow-petro: #FDC82F;
+  --color-green-petro: #008542;
+  --color-white: #fff;
+  --color-gray: #eee;
+}
+
 .jp-example-view {
   background-color: aliceblue;
   overflow: auto;
 }
 
 .jp-example-button {
-  background-color: #1E90FF;
-  border-radius: 12px;
+  border-radius: 7px;
   border: none;
-  color: white;
-  padding: 15px 32px;
+  color: rgb(97, 97, 97);
+  padding: 10px 10px;
   margin: 2vh;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 10px;
+  font-family: system-ui,'Segoe UI', helvetica, arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   cursor: pointer;
+    min-height: 24px;
+    min-width: 24px;
+    font-size: 12px;
+    padding: 0 7px;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    margin-right: 1vh;
+    margin-left: 1vh;
+    color: var(--color-black);
+    background-color: var(--color-gray);
+    border: none;
 }
 
 .jp-example-button:hover{
@@ -185,8 +205,8 @@ h3 {
   font-size: 16px;
   padding: 1vh;
   border-bottom: 1px solid #eee;
-  color: #333;
-  background-color: #B0C4DE;
+  color: var(--color-black);
+  background-color: #939393;
 
 }
 
