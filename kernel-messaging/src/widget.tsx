@@ -28,9 +28,7 @@ interface Parameter {
 }
 export class KernelView extends ReactWidget {
   private _loading = false;
-  private _scriptLoaded = false;
-  private _dataReloaded = false;
-  // private _fileReloaded = false;
+  private _scriptLoaded = false;    
   private _xRoi = 0;
   private _yRoi = 0;
   private _zRoi = 0;
@@ -42,28 +40,7 @@ export class KernelView extends ReactWidget {
   private _c = 0;
   private _scattering_angle = 0;
   private _model: KernelModel;
-  private _data = {
-              inspectionType: 'Contact',
-              excitation: 'FMC',
-              origin: '[40. 0. 0.]',
-              waterPath: 0,
-              cSpeed: 1483,
-              sampleFreq: 100,
-              gateStart: 0,
-              nbSamples: 2046,
-              hardwareGain: 0.0,
-              digitalGain: 0.0,
-              probeType: 'linear',
-              elementDimen: 0.7,
-              centralFreq: 5,
-              pulseBandwidth: 0.5,
-              nbElements: 32,
-              pitch: 0.7999999,
-              lSpeed: 5900,
-              tSpeed: 3250,
-              surfaceRoughness: 0
-            };
-  
+    
   constructor(model: KernelModel) {
     super();
     this._model = model;  
@@ -82,6 +59,8 @@ export class KernelView extends ReactWidget {
     let result;
     if (model.output?.data) {      
       const data = model.output.data as IMimeBundle;
+      console.log("Dados:");
+      console.log(model.output?.data);
       if ('image/png' in data) {
         result = (model.output.data as IMimeBundle)['image/png'];        
       } else if ('text/plain' in data) {
@@ -93,7 +72,7 @@ export class KernelView extends ReactWidget {
         } else {
           text = raw as string;
         }
-
+        
         if (text.includes("insp_pars")) {
           let tab_insp: Parameter[];
           let tab_probe: Parameter[];
@@ -114,16 +93,19 @@ export class KernelView extends ReactWidget {
           }        
           this.mountTable('tab_insp', tab_insp)
           this.mountTable('tab_probe', tab_probe)
-        } else {
+        } else if (text.includes(".civa")) {
           
           const files = JSON.parse(text.replace(/'/g, '"'));          
           
           const filtered = files.filter(
             (f: string) => f.endsWith(".civa") || f.endsWith(".m2k") || f.endsWith(".civa.zip") || f.endsWith(".m2k.zip")
           );
-          const select = document.getElementById("insp-file") as HTMLElement;
-          console.log(select)
+          const select = document.getElementById("insp-file") as HTMLElement;          
           select.innerHTML = "";
+          const option = document.createElement("option");
+          option.value = "";
+          option.text = "(select an inspection)";
+          select.appendChild(option);
           filtered.forEach((f: string) => {
             console.log("select" + f);
             const option = document.createElement("option");
@@ -131,6 +113,15 @@ export class KernelView extends ReactWidget {
             option.text = f;            
             select.appendChild(option);
           })
+
+          const selectFile = document.getElementById("insp-file") as HTMLSelectElement;
+          const input = document.getElementById("file-input") as HTMLInputElement;
+          let fileName; 
+          if (input && input.files && input.files.length > 0) {            
+            fileName = input.files[0].name;
+            selectFile.value = fileName.replace(".zip", "");
+          }
+          input.value = "";          
         }
       } else {
         console.log("Formato não reconhecido", data);
@@ -205,6 +196,8 @@ export class KernelView extends ReactWidget {
   private  handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
+    this._loading = true;
+    this.update();
 
     const arrayBuffer = await file.arrayBuffer();
     const uint8Array = new Uint8Array(arrayBuffer);
@@ -217,8 +210,11 @@ export class KernelView extends ReactWidget {
       await this.loadPythonScript('http://localhost:8000/files/test.py');
       this._scriptLoaded = true;
     }
+    console.log("Save file start");
     await runPythonFunction(this._model, `save_bytes_as_file("${base64Data}", "${filename}")`);
     
+    this._loading = false;
+    this.update();
   }
 
   private uint8ToBase64(uint8Array: Uint8Array): string {
@@ -238,7 +234,7 @@ export class KernelView extends ReactWidget {
       <div style={{ height: "100vh" }}>
         <ScrollContainer topOffset={50}>
           <div className="kernel-container">
-            <div className='head'>
+            {/* <div className='head'>
               <div className='img'>
                 <img
                   src='kernel-messaging/src/LASSIP-Icon.jpg'
@@ -254,7 +250,7 @@ export class KernelView extends ReactWidget {
                   Copyright
                 </button>
               </div>
-            </div>
+            </div> */}
             
             <div className='container'>
               <div className='selected-file'>
@@ -265,6 +261,13 @@ export class KernelView extends ReactWidget {
                 <div className="sidebar">
                   <div className="card-files">
                     <h3>Files</h3>
+
+                    <div className="file-select-wrapper">
+                      <label>
+                        Upload file:
+                        <input type="file" id="file-input" style={{width: '95%'}} onChange={this.handleFileChange} />
+                      </label>
+                    </div>
                     <button
                       disabled={this._loading}
                       className={`jp-example-button ${this._loading ? 'disabled-button' : ''}`}
@@ -279,7 +282,7 @@ export class KernelView extends ReactWidget {
                         await runPythonFunction(
                           this._model,
                           `list_data()`
-                        );                        
+                        );
 
                         this._loading = false;                        
                         this.update();
@@ -291,8 +294,24 @@ export class KernelView extends ReactWidget {
                       <label htmlFor="insp-file">Select an inspection:</label>
                       <select
                         id="insp-file"
+                        onChange={async (): Promise<void> => {
+                          this._loading = true;
+                          this.update();
+                          if (!this._scriptLoaded) {
+                            await this.loadPythonScript('http://localhost:8000/files/test.py');
+                            this._scriptLoaded = true;
+                          }
+                          const select = document.getElementById("insp-file") as HTMLSelectElement;
+                          const file = select.value as string;
+                          if (file !== "") {
+                            await runPythonFunction(this._model,`load_data("${file}")`);
+                          }
+                          this._height; this._pix_height; this._width; this._pix_width; this._shot; this._c; this._scattering_angle;
+                          this._loading = false;
+                          this.update();
+                        }}
                       >
-                        <option value="">-- select --</option>                        
+                        <option value="">(select an inspection)</option>                        
                       </select>
                     </div>
                     <button
@@ -305,12 +324,11 @@ export class KernelView extends ReactWidget {
                             await this.loadPythonScript('http://localhost:8000/files/test.py');
                             this._scriptLoaded = true;
                           }
-                          const select = document.getElementById("insp-file") as HTMLSelectElement;                          
+                          const select = document.getElementById("insp-file") as HTMLSelectElement;
                           const file = select.value as string;
-                          await runPythonFunction(
-                            this._model,
-                            `load_data("${file}")`
-                          );
+                          if (file !== "") {
+                            await runPythonFunction(this._model,`load_data("${file}")`);
+                          }
                           this._height; this._pix_height; this._width; this._pix_width; this._shot; this._c; this._scattering_angle;
                           this._loading = false;
                           this.update();
@@ -318,13 +336,6 @@ export class KernelView extends ReactWidget {
                       >
                         Load inspection data
                     </button>                    
-                    <br />
-                    <div style={{ padding: "10px" }}>
-                      <label>
-                        Upload file:
-                        <input type="file" onChange={this.handleFileChange} />
-                      </label>
-                    </div>
                   </div>
 
                   <br />
@@ -333,55 +344,31 @@ export class KernelView extends ReactWidget {
                     <div className='h3'>
                       <h3>Data</h3>
                     </div>
-                    
-                    <button
-                      disabled={this._loading}
-                      className={`jp-example-button ${this._loading ? 'disabled-button' : ''}`}
-                      style={{display:'none'}}
-                      onClick={async (): Promise<void> => {
-                        this._loading = true;
-                        this.update();
-
-                        await new Promise(resolve => setTimeout(resolve, 1000));
-                        this._data;
-                        if (!this._dataReloaded) {
-                          this._dataReloaded = true;
-                          console.log('data reloaded');
-                        }
-                        this._loading = false;
-                        this.update();
-                      }}
-                    >
-                      Reload Data
-                    </button>
-                     
-                      <br />
-                      
-                      <div className="table-wrapper table-scroll">
-                        <div className="table-title">Inspection Parameters</div>
-                        <table className="jupyter" id='tab_insp'>
-                          <thead>
+                    <div className="table-wrapper table-scroll">
+                      <div className="table-title">Inspection Parameters</div>
+                      <table className="jupyter" id='tab_insp'>
+                        <thead>
+                          <tr>
+                            <th>Parâmetro</th>
+                            <th>Valor</th>
+                          </tr>
+                        </thead>
+                        <tbody></tbody>
+                      </table>
+                    </div>
+                    <br />                      
+                    <div className="table-wrapper table-scroll">
+                      <div className="table-title">Probe Parameters</div>
+                      <table className="jupyter" id='tab_probe'>
+                        <thead>
                             <tr>
                               <th>Parâmetro</th>
                               <th>Valor</th>
                             </tr>
-                          </thead>
-                          <tbody></tbody>
-                        </table>
-                      </div>
-                      <br />                      
-                      <div className="table-wrapper table-scroll">
-                        <div className="table-title">Probe Parameters</div>
-                        <table className="jupyter" id='tab_probe'>
-                          <thead>
-                              <tr>
-                                <th>Parâmetro</th>
-                                <th>Valor</th>
-                              </tr>
-                          </thead>
-                          <tbody></tbody>                        
-                        </table>
-                      </div>                                        
+                        </thead>
+                        <tbody></tbody>                        
+                      </table>
+                    </div>                                        
                   </div>
                 </div>
 
@@ -518,11 +505,13 @@ export class KernelView extends ReactWidget {
                             this._scriptLoaded = true;
                           }                          
                           const select = document.getElementById("insp-file") as HTMLSelectElement;                          
-                          const file = select.value as string;                          
-                          await runPythonFunction(
-                            this._model,
-                            `run_saft(${this._xRoi}, ${this._yRoi}, ${this._zRoi}, "${file}")`
-                          );
+                          const file = select.value as string;
+                          if (file !== "") {                        
+                            await runPythonFunction(
+                              this._model,
+                              `run_saft(${this._xRoi}, ${this._yRoi}, ${this._zRoi}, "${file}")`
+                            );
+                          }
                           this._height; this._pix_height; this._width; this._pix_width; this._shot; this._c; this._scattering_angle;
                           this._loading = false;
                           this.update();
