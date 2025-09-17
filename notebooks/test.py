@@ -17,7 +17,10 @@ def save_bytes_as_file(b64, filename):
     data = base64.b64decode(b64)
     with open(filename, "wb") as f:
         f.write(data)
-    print("Arquivo salvo:", filename)
+    
+    extract_zip_rename_root(filename)
+
+    return list_data()
 
 def run_saft(x_roi, y_roi, z_roi, selected_insp):     
     #p_roy = json.loads(JSON.parse(obj_roi))

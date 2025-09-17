@@ -202,7 +202,7 @@ body{
 
 h3 {
   margin-top: 0;
-  font-size: 16px;
+  font-size: 12px;
   padding: 1vh;
   border-bottom: 1px solid #eee;
   color: var(--color-black);
@@ -373,6 +373,8 @@ table.jupyter thead th.sticky {
 
 .file-select-wrapper {
   margin: 0.5rem 0;
+  padding-left: 10px;
+  padding-right: 10px;
   display: flex;
   flex-direction: column;
 }
