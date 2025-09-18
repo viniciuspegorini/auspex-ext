@@ -28,6 +28,7 @@ interface Parameter {
 }
 export class KernelView extends ReactWidget {
   private _loading = false;
+  private _loadingMessage = "Loading";
   private _scriptLoaded = false;    
   private _xRoi = 0;
   private _yRoi = 0;
@@ -43,7 +44,9 @@ export class KernelView extends ReactWidget {
     
   constructor(model: KernelModel) {
     super();
-    this._model = model;  
+    this._model = model;
+
+    this.loadFiles();  
   }
   
   private async loadPythonScript(scriptUrl: string) {
@@ -55,16 +58,31 @@ export class KernelView extends ReactWidget {
     console.log('python script loaded');
   }
 
-  private getValue(model: KernelModel): any {    
+  private async loadFiles() {
+    this._loading = true;
+    this._loadingMessage = "Loading Pyodide Kernel..."
+    this.update();
+    await this._model.sessionContext.ready;
+    if (!this._scriptLoaded) {      
+      await this.loadPythonScript('http://localhost:8000/files/test.py');      
+      this._scriptLoaded = true;
+    }    
+    await runPythonFunction(this._model, `list_data()`);
+    this._loading = false;
+    this._loadingMessage = ""
+    this.update();
+  }
+
+  private getValue(model: KernelModel): any {
     let result;
-    if (model.output?.data) {      
+    if (model.output?.data) {
       const data = model.output.data as IMimeBundle;
       console.log("Dados:");
       console.log(model.output?.data);
       if ('image/png' in data) {
-        result = (model.output.data as IMimeBundle)['image/png'];        
+        result = (model.output.data as IMimeBundle)['image/png'];
       } else if ('text/plain' in data) {
-        let raw = (model.output.data as IMimeBundle)['text/plain'];        
+        let raw = (model.output.data as IMimeBundle)['text/plain'];
         // normaliza para string
         let text: string;
         if (Array.isArray(raw)) {
@@ -232,6 +250,12 @@ export class KernelView extends ReactWidget {
   protected render(): React.ReactElement<any> {    
     return (
       <div style={{ height: "100vh" }}>
+        {this._loading && (
+          <div className="loading-overlay">
+            <div className="loading-spinner" />
+            <span> {this._loadingMessage !== ""  ? this._loadingMessage : "Loading..."}</span>
+          </div>
+        )}
         <ScrollContainer topOffset={50}>
           <div className="kernel-container">
             {/* <div className='head'>
@@ -279,10 +303,7 @@ export class KernelView extends ReactWidget {
                           this._scriptLoaded = true;
                         }
                         
-                        await runPythonFunction(
-                          this._model,
-                          `list_data()`
-                        );
+                        await runPythonFunction(this._model, `list_data()`);
 
                         this._loading = false;                        
                         this.update();

@@ -11,6 +11,10 @@ export class KernelModel {
     this._sessionContext = session;
   }
 
+  get sessionContext(): ISessionContext {
+    return this._sessionContext;
+  }
+
     // Getter para o kernel
   get kernel(): Kernel.IKernelConnection | null {
     return this._sessionContext.session?.kernel ?? null;

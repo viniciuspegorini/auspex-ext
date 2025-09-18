@@ -45,7 +45,7 @@ def load_data(selected_insp):
     if (selected_insp.endswith('.civa')):
         data = file_civa.read(selected_insp)
     else:
-        data = file_m2k.read(selected_insp, type_insp='contact', water_path=0, freq_transd=5, bw_transd=0.5,
+        data = file_m2k.read(selected_insp, type_insp='contact', water_path=0, freq_transd=5, bw_transd=0.8,
                      tp_transd='gaussian', sel_shots=0)
         
     readonly_params = 'false'
