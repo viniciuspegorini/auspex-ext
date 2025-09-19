@@ -37,7 +37,7 @@ export class KernelView extends ReactWidget {
   private _pix_height = 0;
   private _width = 0;
   private _pix_width = 0;
-  private _shot = 0;
+  private _sel_shot = 0;
   private _c = 0;
   private _scattering_angle = 0;
   private _model: KernelModel;
@@ -327,7 +327,7 @@ export class KernelView extends ReactWidget {
                           if (file !== "") {
                             await runPythonFunction(this._model,`load_data("${file}")`);
                           }
-                          this._height; this._pix_height; this._width; this._pix_width; this._shot; this._c; this._scattering_angle;
+                          this._height; this._pix_height; this._width; this._pix_width; this._sel_shot; this._c; this._scattering_angle;
                           this._loading = false;
                           this.update();
                         }}
@@ -350,7 +350,7 @@ export class KernelView extends ReactWidget {
                           if (file !== "") {
                             await runPythonFunction(this._model,`load_data("${file}")`);
                           }
-                          this._height; this._pix_height; this._width; this._pix_width; this._shot; this._c; this._scattering_angle;
+                          this._height; this._pix_height; this._width; this._pix_width; this._sel_shot; this._c; this._scattering_angle;
                           this._loading = false;
                           this.update();
                         }}
@@ -482,7 +482,7 @@ export class KernelView extends ReactWidget {
                             type="number"
                             defaultValue="0"
                             onChange={(e) => {
-                              this._shot = Number(e.target.value)
+                              this._sel_shot = Number(e.target.value)
                             }}
                           />
                         </label>
@@ -526,14 +526,26 @@ export class KernelView extends ReactWidget {
                             this._scriptLoaded = true;
                           }                          
                           const select = document.getElementById("insp-file") as HTMLSelectElement;                          
-                          const file = select.value as string;
-                          if (file !== "") {                        
+                          const file = select.value as string;                          
+                          if (file !== "") {                  
+                            const params = {
+                                            x: this._xRoi,
+                                            y: this._yRoi,
+                                            z: this._zRoi,
+                                            scattering_angle: this._scattering_angle,
+                                            selected_file: file,
+                                            c: this._c,
+                                            sel_shot: this._sel_shot
+                                          };
+                          const paramsJson = JSON.stringify(params).replace(/"/g, '\\"');      
                             await runPythonFunction(
                               this._model,
-                              `run_saft(${this._xRoi}, ${this._yRoi}, ${this._zRoi}, "${file}")`
+`import json
+params = json.loads("${paramsJson}")
+run_saft(params, "${file}")`
                             );
                           }
-                          this._height; this._pix_height; this._width; this._pix_width; this._shot; this._c; this._scattering_angle;
+                          this._height; this._pix_height; this._width; this._pix_width; this.sel_shot; this._c; this._scattering_angle;
                           this._loading = false;
                           this.update();
                         }}
@@ -548,15 +560,14 @@ export class KernelView extends ReactWidget {
 
                   <div className="card-result">
                     <h3>Result</h3>
-                      <div className='result'>
+                      <div className='image-container'>
                         <UseSignal signal={this._model.stateChanged}>
                           {(): JSX.Element => (
                             <>
                               {this._loading ? (
                                 <div style={{ padding: '1em' }}>⏳ Loading...</div>
                               ) : this.getValue(this._model) ? (
-                                <>
-                                  <br />
+                                <>                                  
                                   <img
                                     src={`data:image/png;base64,${this.getValue(this._model)}`}
                                     alt="Resultado SAFT"
@@ -564,7 +575,7 @@ export class KernelView extends ReactWidget {
                                 </>
                               ) : (
                                 <div style={{ padding: '1em' }}>
-                                  Clique em <b>Run Saft</b> para executar
+                                  Click <b>Run Saft</b> to execute
                                 </div>
                               )}
                             </>

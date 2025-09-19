@@ -11,6 +11,7 @@ import io
 import shutil
 # import json
 # from js import JSON
+import json
 
 import base64
 def save_bytes_as_file(b64, filename):
@@ -22,10 +23,11 @@ def save_bytes_as_file(b64, filename):
 
     return list_data()
 
-def run_saft(x_roi, y_roi, z_roi, selected_insp):     
+def run_saft(roi_data, selected_insp):
+    # roi_data = json.loads(roi_all)
     #p_roy = json.loads(JSON.parse(obj_roi))
     data = file_civa.read(selected_insp.strip())
-    corner_roi = np.array([x_roi, y_roi, z_roi])[np.newaxis, :]
+    corner_roi = np.array([roi_data["x"], roi_data["y"], roi_data["z"]])[np.newaxis, :]
     roi = ImagingROI(corner_roi, height=20.0, width=20.0, h_len=200, w_len=200)
     key = saft.saft_kernel(data, roi=roi, sel_shot=0, c=5900.0)
     image_out = data.imaging_results[key].image
@@ -33,6 +35,28 @@ def run_saft(x_roi, y_roi, z_roi, selected_insp):
             extent=[roi.w_points[0], roi.w_points[-1], roi.h_points[-1], roi.h_points[0]])
     plt.title('SAFT')
     plt.show()
+
+def saft(params):
+
+    data = file_civa.read(params["selected_file"].strip())
+
+    corner_roi = np.array([params["x"], params["y"], params["z"]])[np.newaxis, :]
+    roi = ImagingROI(corner_roi, height=roi.height, width=roi.width, h_len=roi.pixelheight, w_len=roi.pixelwidth)
+
+    scattering_angle = params["scattering_angle"]
+
+    if (params != ""):
+      key = saft.saft_kernel(data, roi=roi, sel_shot=params["sel_shot"], c=params["c"], scattering_angle=scattering_angle)
+    else:
+      key = saft.saft_kernel(data, roi=roi, sel_shot=params["sel_shot"], c=params["c"])
+
+    image_out = data.imaging_results[key].image
+
+    plt.imshow(post_proc.envelope(image_out), aspect='auto',
+            extent=[roi.w_points[0], roi.w_points[-1], roi.h_points[-1], roi.h_points[0]])
+    plt.title('SAFT')
+    plt.show()
+
 
 def list_data():    
     return os.listdir(".")
@@ -89,7 +113,9 @@ def load_data(selected_insp):
     
     probe_pars = get_probe_params(data, readonly_params)
 
-    return_data = {'insp_pars': insp_pars, "probe_pars": probe_pars}
+    shot = data.ascan_data.shape[3] - 1
+
+    return_data = {'insp_pars': insp_pars, "probe_pars": probe_pars, "max_shot": shot}
     return return_data
 
 def get_probe_params(data, readonly_params):

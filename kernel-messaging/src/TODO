@@ -5,8 +5,8 @@ TODO - WEB AUSPEX - Extension
 [x] Ao carregar um novo documento, fazer o load data?, vai ser possível? R: deixar para carregar depois que o usuário acertar os valores
 [x] Carregar select de inspeções com a extensão
 [x] Melhorar apresentação do status de processamento. R: adicionado modal de loading.
+[x] Centralizar figura de resultado
 
-[ ] Centralizar figura de resultado
 [ ] Carregar shot e scattering angle
 [ ] Refatorar para transitar objetos entre py e ts
 [ ] Ajustar passagem de parâmetros para o Python

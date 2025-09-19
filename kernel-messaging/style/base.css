@@ -449,3 +449,7 @@ table.jupyter thead th.sticky {
     transform: rotate(360deg);
   }
 }
+
+.image-container {
+  text-align: center;
+}
