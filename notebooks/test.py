@@ -23,7 +23,7 @@ def save_bytes_as_file(b64, filename):
 
     return list_data()
 
-def run_saft(roi_data, selected_insp):
+def run_saft_old(roi_data, selected_insp):
     # roi_data = json.loads(roi_all)
     #p_roy = json.loads(JSON.parse(obj_roi))
     data = file_civa.read(selected_insp.strip())
@@ -31,29 +31,35 @@ def run_saft(roi_data, selected_insp):
     roi = ImagingROI(corner_roi, height=20.0, width=20.0, h_len=200, w_len=200)
     key = saft.saft_kernel(data, roi=roi, sel_shot=0, c=5900.0)
     image_out = data.imaging_results[key].image
-    plt.imshow(post_proc.envelope(image_out), aspect='auto',
-            extent=[roi.w_points[0], roi.w_points[-1], roi.h_points[-1], roi.h_points[0]])
+    if (roi_data["envelop"] == "true"):
+        plt.imshow(post_proc.envelope(image_out), aspect='auto', extent=[roi.w_points[0], roi.w_points[-1], roi.h_points[-1], roi.h_points[0]])
+    else:
+        plt.imshow(post_proc.envelope(image_out), aspect='auto', extent=[roi.w_points[0], roi.w_points[-1], roi.h_points[-1], roi.h_points[0]])
+
     plt.title('SAFT')
     plt.show()
 
-def saft(params):
+def run_saft(params):
 
     data = file_civa.read(params["selected_file"].strip())
 
     corner_roi = np.array([params["x"], params["y"], params["z"]])[np.newaxis, :]
-    roi = ImagingROI(corner_roi, height=roi.height, width=roi.width, h_len=roi.pixelheight, w_len=roi.pixelwidth)
+    roi = ImagingROI(corner_roi, height=params["height"], width=params["width"], h_len=params["pixel_height"], w_len=params["pixel_width"])
 
     scattering_angle = params["scattering_angle"]
 
-    if (params != ""):
+    if (params["scattering_angle"] != "" and params["scattering_angle"] != 0 and params["scattering_angle"] != "0"):
       key = saft.saft_kernel(data, roi=roi, sel_shot=params["sel_shot"], c=params["c"], scattering_angle=scattering_angle)
     else:
       key = saft.saft_kernel(data, roi=roi, sel_shot=params["sel_shot"], c=params["c"])
 
     image_out = data.imaging_results[key].image
+        
+    if (params["envelop"] == True):
+        plt.imshow(post_proc.envelope(image_out), aspect='auto', extent=[roi.w_points[0], roi.w_points[-1], roi.h_points[-1], roi.h_points[0]])
+    else:
+        plt.imshow(image_out, aspect='auto', extent=[roi.w_points[0], roi.w_points[-1], roi.h_points[-1], roi.h_points[0]])
 
-    plt.imshow(post_proc.envelope(image_out), aspect='auto',
-            extent=[roi.w_points[0], roi.w_points[-1], roi.h_points[-1], roi.h_points[0]])
     plt.title('SAFT')
     plt.show()
 

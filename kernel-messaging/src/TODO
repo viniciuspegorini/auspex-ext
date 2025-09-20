@@ -6,18 +6,19 @@ TODO - WEB AUSPEX - Extension
 [x] Carregar select de inspeções com a extensão
 [x] Melhorar apresentação do status de processamento. R: adicionado modal de loading.
 [x] Centralizar figura de resultado
+[x] Adicionar a funcionalidade de envelope
+
 
 [ ] Carregar shot e scattering angle
 [ ] Refatorar para transitar objetos entre py e ts
 [ ] Ajustar passagem de parâmetros para o Python
-[ ] Adicionar a funcionalidade de envelope
 [ ] Ao carregar, ajustar botão de selecione (carregamento de arquivos)
 [ ] Verificar arquivos/pastas duplicadas
 [ ] Ajustar responsividade
 [ ] Melhorar botão + combo de carregamento de arquivos
 [ ] Barra superior com o status do kernel (pyodide)
 
-[ ] Arquivo .m2k, propriedades? R: valores padrão definidos, passar os demais
+[ ] Arquivo .m2k, propriedades? R: valores padrão definidos, passar os demais (valores de data (inputs criados na mão))
 [ ] Refatorar código-fonte
 
 [ ] Selecionar área da figura (ROI)

@@ -23,8 +23,8 @@ interface Parameter {
   type: ParamType;
   value: string | number;
   readonly: string;
-  values?: Record<string, string>; // só quando type = "list"
-  decimals?: number;              // só quando type = "float"
+  values?: Record<string, string>; // type = "list"
+  decimals?: number;              // type = "float"
 }
 export class KernelView extends ReactWidget {
   private _loading = false;
@@ -33,13 +33,15 @@ export class KernelView extends ReactWidget {
   private _xRoi = 0;
   private _yRoi = 0;
   private _zRoi = 0;
-  private _height = 0;
-  private _pix_height = 0;
-  private _width = 0;
-  private _pix_width = 0;
+  private _height = 20;
+  private _pixel_height = 200;
+  private _width = 20;
+  private _pixel_width = 200;
   private _sel_shot = 0;
-  private _c = 0;
+  private _c = 5900;
   private _scattering_angle = 0;
+  private _envelop = false;
+
   private _model: KernelModel;
     
   constructor(model: KernelModel) {
@@ -326,8 +328,7 @@ export class KernelView extends ReactWidget {
                           const file = select.value as string;
                           if (file !== "") {
                             await runPythonFunction(this._model,`load_data("${file}")`);
-                          }
-                          this._height; this._pix_height; this._width; this._pix_width; this._sel_shot; this._c; this._scattering_angle;
+                          }                          
                           this._loading = false;
                           this.update();
                         }}
@@ -349,8 +350,7 @@ export class KernelView extends ReactWidget {
                           const file = select.value as string;
                           if (file !== "") {
                             await runPythonFunction(this._model,`load_data("${file}")`);
-                          }
-                          this._height; this._pix_height; this._width; this._pix_width; this._sel_shot; this._c; this._scattering_angle;
+                          }                          
                           this._loading = false;
                           this.update();
                         }}
@@ -446,7 +446,7 @@ export class KernelView extends ReactWidget {
                             type="number"
                             defaultValue="200"
                             onChange={(e) => {
-                              this._pix_height = Number(e.target.value)
+                              this._pixel_height = Number(e.target.value)
                             }}
                           />
                         </label>
@@ -466,7 +466,7 @@ export class KernelView extends ReactWidget {
                             type="number"
                             defaultValue="200"
                             onChange={(e) => {
-                              this._pix_width = Number(e.target.value)
+                              this._pixel_width = Number(e.target.value)
                             }}
                           />
                         </label>
@@ -511,8 +511,8 @@ export class KernelView extends ReactWidget {
 
                     <div className="envelope-container">
                       <div className='div-env'>
-                        <input type="checkbox" id="env" />
-                        <label htmlFor="env">Envelope</label>
+                        <input type="checkbox" id="envelop" />
+                        <label htmlFor="envelop">Envelop</label>
                       </div>
 
                       <button
@@ -526,26 +526,34 @@ export class KernelView extends ReactWidget {
                             this._scriptLoaded = true;
                           }                          
                           const select = document.getElementById("insp-file") as HTMLSelectElement;                          
+                          const checkbox = document.getElementById("envelop") as HTMLInputElement;
+                          console.log(checkbox.checked)
+                          this._envelop = checkbox.checked;
+                          console.log(this._envelop)
                           const file = select.value as string;                          
                           if (file !== "") {                  
                             const params = {
                                             x: this._xRoi,
                                             y: this._yRoi,
                                             z: this._zRoi,
+                                            height: this._height,
+                                            width: this._width,
+                                            pixel_height: this._pixel_height,
+                                            pixel_width: this._pixel_width,                                            
                                             scattering_angle: this._scattering_angle,
                                             selected_file: file,
                                             c: this._c,
-                                            sel_shot: this._sel_shot
+                                            sel_shot: this._sel_shot,
+                                            envelop: this._envelop
                                           };
                           const paramsJson = JSON.stringify(params).replace(/"/g, '\\"');      
                             await runPythonFunction(
                               this._model,
 `import json
 params = json.loads("${paramsJson}")
-run_saft(params, "${file}")`
+run_saft(params)`
                             );
-                          }
-                          this._height; this._pix_height; this._width; this._pix_width; this.sel_shot; this._c; this._scattering_angle;
+                          }                          
                           this._loading = false;
                           this.update();
                         }}
@@ -570,7 +578,7 @@ run_saft(params, "${file}")`
                                 <>                                  
                                   <img
                                     src={`data:image/png;base64,${this.getValue(this._model)}`}
-                                    alt="Resultado SAFT"
+                                    alt="SAFT Result"
                                   />
                                 </>
                               ) : (
