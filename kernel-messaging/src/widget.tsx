@@ -41,6 +41,13 @@ export class KernelView extends ReactWidget {
   private _c = 5900;
   private _scattering_angle = 0;
   private _envelop = false;
+  private _max_shot = 0;
+
+  private _type_insp = "contact";
+  private _water_path = 0;
+  private _freq_transd = 5;
+  private _bw_transd = 0.8;
+  private _tp_transd = "gaussian"
 
   private _model: KernelModel;
     
@@ -100,7 +107,10 @@ export class KernelView extends ReactWidget {
             // substitui aspas simples por duplas e tenta converter para JSON
             const parsed = JSON.parse(text.replace(/'/g, '"'));
             tab_insp = parsed.insp_pars as Parameter[]
-            tab_probe = parsed.probe_pars as Parameter[]                    
+            tab_probe = parsed.probe_pars as Parameter[]
+            if (parsed._max_shot) {
+              this._max_shot = parsed._max_shot
+            }
           } catch( error ) {
             if (error instanceof Error) {
               console.error("Erro:", error.message);   // só a mensagem
@@ -311,7 +321,7 @@ export class KernelView extends ReactWidget {
                         this.update();
                       }}
                     >
-                      Load inspections
+                      🔃 Update inspection list
                     </button>
                     <div className="file-select-wrapper">
                       <label htmlFor="insp-file">Select an inspection:</label>
@@ -327,7 +337,7 @@ export class KernelView extends ReactWidget {
                           const select = document.getElementById("insp-file") as HTMLSelectElement;
                           const file = select.value as string;
                           if (file !== "") {
-                            await runPythonFunction(this._model,`load_data("${file}")`);
+                            await runPythonFunction(this._model,`load_inspection_params("${file}")`);
                           }                          
                           this._loading = false;
                           this.update();
@@ -349,13 +359,13 @@ export class KernelView extends ReactWidget {
                           const select = document.getElementById("insp-file") as HTMLSelectElement;
                           const file = select.value as string;
                           if (file !== "") {
-                            await runPythonFunction(this._model,`load_data("${file}")`);
+                            await runPythonFunction(this._model,`load_inspection_params("${file}")`);
                           }                          
                           this._loading = false;
                           this.update();
                         }}
                       >
-                        Load inspection data
+                        ♻️ Update inspection data
                     </button>                    
                   </div>
 
@@ -481,6 +491,7 @@ export class KernelView extends ReactWidget {
                           <input
                             type="number"
                             defaultValue="0"
+                            max={this._max_shot}
                             onChange={(e) => {
                               this._sel_shot = Number(e.target.value)
                             }}
@@ -544,7 +555,12 @@ export class KernelView extends ReactWidget {
                                             selected_file: file,
                                             c: this._c,
                                             sel_shot: this._sel_shot,
-                                            envelop: this._envelop
+                                            envelop: this._envelop,
+                                            type_insp: this._type_insp,
+                                            water_path: this._water_path,
+                                            freq_transd: this._freq_transd,
+                                            bw_transd: this._bw_transd,
+                                            tp_transd: this._tp_transd,
                                           };
                           const paramsJson = JSON.stringify(params).replace(/"/g, '\\"');      
                             await runPythonFunction(
@@ -558,7 +574,7 @@ run_saft(params)`
                           this.update();
                         }}
                       >
-                        Run Saft
+                        ▶️ Run Saft
                       </button>
                     </div>
                     
