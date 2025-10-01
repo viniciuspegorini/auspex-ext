@@ -49,6 +49,8 @@ export class KernelView extends ReactWidget {
   private _bw_transd = 0.8;
   private _tp_transd = "gaussian"
 
+  private _scriptURL = "https://webauspex.app.pb.utfpr.edu.br/files/test.py"
+
   private _model: KernelModel;
     
   constructor(model: KernelModel) {
@@ -73,7 +75,7 @@ export class KernelView extends ReactWidget {
     this.update();
     await this._model.sessionContext.ready;
     if (!this._scriptLoaded) {      
-      await this.loadPythonScript('http://localhost:8000/files/test.py');      
+      await this.loadPythonScript(this._scriptURL);      
       this._scriptLoaded = true;
     }    
     await runPythonFunction(this._model, `list_data()`);
@@ -237,7 +239,7 @@ export class KernelView extends ReactWidget {
 
     const filename = file.name;
     if (!this._scriptLoaded) {
-      await this.loadPythonScript('http://localhost:8000/files/test.py');
+      await this.loadPythonScript(this._scriptURL);
       this._scriptLoaded = true;
     }
     console.log("Save file start");
@@ -311,7 +313,7 @@ export class KernelView extends ReactWidget {
                         this._loading = true;
                         this.update();
                         if (!this._scriptLoaded) {
-                          await this.loadPythonScript('http://localhost:8000/files/test.py');
+                          await this.loadPythonScript(this._scriptURL);
                           this._scriptLoaded = true;
                         }
                         
@@ -331,7 +333,7 @@ export class KernelView extends ReactWidget {
                           this._loading = true;
                           this.update();
                           if (!this._scriptLoaded) {
-                            await this.loadPythonScript('http://localhost:8000/files/test.py');
+                            await this.loadPythonScript(this._scriptURL);
                             this._scriptLoaded = true;
                           }
                           const select = document.getElementById("insp-file") as HTMLSelectElement;
@@ -353,7 +355,7 @@ export class KernelView extends ReactWidget {
                           this._loading = true;
                           this.update();
                           if (!this._scriptLoaded) {
-                            await this.loadPythonScript('http://localhost:8000/files/test.py');
+                            await this.loadPythonScript(this._scriptURL);
                             this._scriptLoaded = true;
                           }
                           const select = document.getElementById("insp-file") as HTMLSelectElement;
@@ -533,7 +535,7 @@ export class KernelView extends ReactWidget {
                           this._loading = true;
                           this.update();
                           if (!this._scriptLoaded) {
-                            await this.loadPythonScript('http://localhost:8000/files/test.py');
+                            await this.loadPythonScript(this._scriptURL);
                             this._scriptLoaded = true;
                           }                          
                           const select = document.getElementById("insp-file") as HTMLSelectElement;                          
