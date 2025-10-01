@@ -1,22 +1,23 @@
 TODO - WEB AUSPEX - Extension
 
-[ ] Apenas uma extensão ou várias?
-[ ] Posição dos elementos na extensão
-[ ] Arquivo .m2k, propriedades??
+[x] Apenas uma extensão ou várias? R: Várias
+[x] Posição dos elementos na extensão. R: ok por hora
+[x] Ao carregar um novo documento, fazer o load data?, vai ser possível? R: deixar para carregar depois que o usuário acertar os valores
+[x] Carregar select de inspeções com a extensão
+[x] Melhorar apresentação do status de processamento. R: adicionado modal de loading.
+[x] Centralizar figura de resultado
+[x] Adicionar a funcionalidade de envelope
+[x] Carregar shot e scattering angle
+[x] Ajustar passagem de parâmetros para o Python
+[x] Arquivo .m2k, propriedades? R: valores padrão definidos, passar os demais (valores de data (inputs criados na mão))
+[x] Ao carregar, ajustar botão de selecione (carregamento de arquivos)
+[x] Melhorar botão + combo de carregamento de arquivos
 
-[ ] Ao carregar um novo documento, fazer o load data?, vai ser possível?
+[ ] Refatorar código-fonte
+    [ ] Refatorar para transitar objetos entre py e ts
 
-[ ] Carregar select de inspeções com a extensão
 [ ] Verificar arquivos/pastas duplicadas
 [ ] Ajustar responsividade
-[ ] Refatorar código-fonte
-[ ] Melhorar botão + combo de carregamento de arquivos
-[ ] Ao carregar, ajustar botão de selecione (carregamento de arquivos)
-[ ] Melhorar apresentação do status de processamento
 [ ] Barra superior com o status do kernel (pyodide)
-[ ] Adicionar a funcionalidade de envelope
 [ ] Selecionar área da figura (ROI)
-[ ] Centralizar figura de resultado
-[ ] Carregar shot e scattering angle
-[ ] Refatorar para transitar objetos entre py e ts
 [ ] Veriricar se tem como buscar atualizações no sistema de arquivos (callback)
