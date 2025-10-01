@@ -1,8 +1,23 @@
+########################### NETWORK
+networks:
+  web:
+    external: true
+  internal:
+    external: false
+
+########################### SERVICES
 services:
-  jupyterlite:
+  webauspex-jupyterlite:
     build: .
-    ports:
-      - "8000:8000"
     volumes:
       - ./notebooks:/app/notebooks
-    restart: unless-stopped 
+    restart: unless-stopped     
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.webauspex-jupyterlite.rule=Host(`webauspex.app.pb.utfpr.edu.br`)"
+      - "traefik.http.routers.webauspex-jupyterlite.entrypoints=websecure"
+      - "traefik.http.routers.webauspex-jupyterlite.tls.certresolver=letsencrypt"
+    ports:
+      - 8633:8000
+    networks:
+      - web
