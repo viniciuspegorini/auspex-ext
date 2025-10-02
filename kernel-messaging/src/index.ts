@@ -11,6 +11,16 @@ import { ITranslator } from '@jupyterlab/translation';
 
 import { ExamplePanel } from './panel';
 
+import { LabIcon } from '@jupyterlab/ui-components';
+import iconSvgStr from '../style/saft.svg';
+
+// Create a new LabIcon instance from the SVG string
+export const saftIcon = new LabIcon({
+  name: 'my-extension-name:my-icon',
+  svgstr: iconSvgStr,
+});
+
+
 /**
  * The command IDs used by the console plugin.
  */
@@ -46,7 +56,7 @@ function activate(
 ): void {
   const manager = app.serviceManager;
   const { commands, shell } = app;
-  const category = 'AUSPEX Extensions';
+  const category = 'WebAUSPEX Extensions';
   const trans = translator.load('jupyterlab');
 
   // Add launcher
@@ -70,8 +80,9 @@ function activate(
 
   // add commands to registry
   commands.addCommand(CommandIDs.create, {
-    label: trans.__('Open AUSPEX SAFT Panel'),
-    caption: trans.__('Open AUSPEX SAFT Panel'),
+    label: trans.__('SAFT'),
+    caption: trans.__('SAFT'),
+    icon: saftIcon,
     execute: createPanel
   });
 

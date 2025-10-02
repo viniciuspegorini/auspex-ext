@@ -49,7 +49,8 @@ export class KernelView extends ReactWidget {
   private _bw_transd = 0.8;
   private _tp_transd = "gaussian"
 
-  private _scriptURL = "https://webauspex.app.pb.utfpr.edu.br/files/test.py"
+  // private _scriptURL = "https://webauspex.app.pb.utfpr.edu.br/files/test.py"
+  private _scriptURL = "http://localhost:8633/files/test.py"
 
   private _model: KernelModel;
     
@@ -71,7 +72,7 @@ export class KernelView extends ReactWidget {
 
   private async loadFiles() {
     this._loading = true;
-    this._loadingMessage = "Loading Pyodide Kernel..."
+    this._loadingMessage = "Loading Pyodide Kernel"
     this.update();
     await this._model.sessionContext.ready;
     if (!this._scriptLoaded) {      

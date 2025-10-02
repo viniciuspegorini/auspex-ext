@@ -1,7 +1,7 @@
 {
     "name": "@jupyterlab-examples/kernel-messaging",
-    "version": "0.1.0",
-    "description": "JupyterLab extension example for kernel messaging.",
+    "version": "0.1.1",
+    "description": "WebAUSPEX extension.",
     "keywords": [
         "jupyter",
         "jupyterlab",

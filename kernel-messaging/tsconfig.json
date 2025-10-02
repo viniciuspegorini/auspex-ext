@@ -1,5 +1,5 @@
 {
-  "compilerOptions": {
+  "compilerOptions": {    
     "allowSyntheticDefaultImports": true,
     "composite": true,
     "declaration": true,
